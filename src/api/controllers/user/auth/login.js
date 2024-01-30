@@ -46,7 +46,8 @@ export default async (req, res) => {
         expiresIn: Date.now() + 604800000,
         createdAt: Date.now()
       },
-    }
+    },
+    { upsert: true }
   ).catch((err) => {
     return res.status(500).json(errorHelper('00046', req, err.message));
   });

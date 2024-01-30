@@ -1,0 +1,34 @@
+### 
+POST  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+Content-Type: application/json
+
+{
+
+    "name":"Hotel 2",
+    "location":"Ranchi",
+    "description":"Dhonis's Hotel",
+    "customAIDescription":"Dhonis's hotel description",
+    "place_id":"plc_1252116"
+    
+}
+
+### get hotel description
+
+GET  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+
+###  Edit current description 
+
+PUT  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+Content-Type: application/json
+
+{
+
+    "name":"Hotel 54"
+}
+### DELETE A BUSINESS
+
+DELETE  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs

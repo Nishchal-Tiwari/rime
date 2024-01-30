@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey Sphere</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          -45deg,
+          /* #ee7752, */
+          /* #e73c7e, */
+          #23a6d5,
+          #94d523,
+          yellow
+        );
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        /* height: 110vh; */
+      }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .reviewFormContainer {
+        position: relative;
+        /* border: 20px solid red; */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+      }
+
+      .reviewFormContainer .air {
+        position: fixed;
+        bottom: 0;
+        /* z-index: 0; */
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
+        background-size: 1000px 100px;
+      }
+
+      .reviewFormContainer .air.air1 {
+        animation: wave 30s linear infinite;
+        z-index: 1000;
+        opacity: 1;
+        animation-delay: 0s;
+        bottom: 0;
+      }
+
+      .reviewFormContainer .air.air2 {
+        animation: wave2 15s linear infinite;
+        z-index: 999;
+        opacity: 0.5;
+        animation-delay: -5s;
+        bottom: 10px;
+      }
+
+      .reviewFormContainer .air.air3 {
+        animation: wave 30s linear infinite;
+        z-index: 998;
+        opacity: 0.2;
+        animation-delay: -2s;
+        bottom: 15px;
+      }
+
+      .reviewFormContainer .air.air4 {
+        animation: wave2 5s linear infinite;
+        z-index: 997;
+        opacity: 0.7;
+        animation-delay: -5s;
+        bottom: 20px;
+      }
+      @keyframes wave {
+        0% {
+          background-position-x: 0px;
+        }
+
+        100% {
+          background-position-x: 1000px;
+        }
+      }
+
+      @keyframes wave2 {
+        0% {
+          background-position-x: 0px;
+        }
+
+        100% {
+          background-position-x: -1000px;
+        }
+      }
+      form {
+      }
+
+      .star-rating {
+        direction: rtl;
+        font-size: 30px;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      .star-rating input[type="radio"] {
+        display: none;
+      }
+
+      .star-rating label {
+        color: #ccc;
+        cursor: pointer;
+      }
+
+      .star-rating input[type="radio"]:checked ~ label,
+      .star-rating label:hover,
+      .star-rating label:hover ~ label {
+        color: gold;
+      }
+
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .suggestions .suggestion {
+        margin: 10px 0;
+      }
+
+      .suggestion input[type="radio"] {
+        display: none;
+      }
+
+      .suggestion label {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .suggestion input[type="radio"]:checked + label {
+        background-color: white;
+        color: white;
+      }
+
+      input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      #mainForm {
+        max-width: 600px;
+        margin: 12vh 0 0 0;
+        padding: 20px;
+        position: relative;
+        z-index: 10000;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .star-rating {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .star-rating label {
+        color: #ccc;
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      .suggestions {
+        margin-top: 20px;
+      }
+
+      .suggestion label {
+        display: block;
+        background-color: #e9e9e9;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 0 10px;
+        }
+
+        #mainForm {
+          width: 100%;
+        }
+      }
+
+      .notification {
+        background-color: #62cc5c; /* Dark background for contrast */
+        color: #fff; /* White text */
+        padding: 15px 20px; /* Padding around the text */
+        border-radius: 25px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+        position: fixed;
+        z-index: 1000;
+        right: 20px;
+        top: 20px;
+        font-family: "Arial", sans-serif;
+        font-size: 16px;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        transform: translateY(-100px);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .notification-icon {
+        margin-right: 10px;
+      }
+
+      .notification.show {
+        transform: translateY(83px);
+        opacity: 1;
+      }
+
+      .notification.hide {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+
+      /* Optional: Animation for icon */
+      @keyframes icon-animation {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .notification-icon {
+        animation: icon-animation 2s infinite;
+      }
+      .header {
+        /* background-color: #4caf50; */
+        padding: 15px;
+        text-align: center;
+        /* margin: ; */
+        position: fixed;
+        z-index: 20000;
+        width: 98vw;
+        top: 0;
+      }
+      .header h1 {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        color: white !important;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        text-transform: capitalize;
+      }
+
+      /* socialmedia */
+
+      .social-media {
+        /* -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); */
+        z-index: 10;
+      }
+
+      /* Icons */
+
+      .social-media a {
+        color: #fff;
+        background: #a4e81c;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        font-family: fontawesome;
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 28px;
+        padding-top: 12px;
+        margin: 0 2px;
+        -o-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        transition: all 0.5s;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .social-media a:hover {
+        background: #28a901;
+      }
+
+      /* pop-up text */
+
+      .social-media a span {
+        z-index: 10;
+        color: #666;
+        position: absolute;
+        font-family: sans-serif;
+        bottom: 0;
+        left: -25px;
+        right: -25px;
+        padding: 5px 7px;
+        z-index: 10;
+        font-size: 14px;
+        border-radius: 2px;
+        background: #a4e81c;
+        visibility: hidden;
+        opacity: 0;
+        -o-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        -moz-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      /* pop-up text arrow */
+
+      .social-media a span:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #fff;
+        position: absolute;
+        bottom: -5px;
+        left: 40px;
+      }
+
+      /* text pops up when icon is in hover state */
+
+      .social-media a:hover span {
+        bottom: 50px;
+        visibility: visible;
+        opacity: 1;
+      }
+
+
+      /* font awesome icons */
+
+      .social-media a:nth-of-type(1):before {
+        content: "😃";
+      }
+      .social-media a:nth-of-type(2):before {
+        content: "🐦‍⬛";
+      }
+      .social-media a:nth-of-type(3):before {
+        content: "📿";
+      }
+      .social-media a:nth-of-type(4):before {
+        content: "\f113";
+      }
+      .social-media a:nth-of-type(5):before {
+        content: "\f17d";
+      }
+      .social-media a:nth-of-type(6):before {
+        content: "\f1cb";
+      }
+
+      .changeBg {
+        background-color: #4caf4fe7 !important;
+        color: white !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="notification" class="notification">
+      <p>Here is your notification!</p>
+    </div>
+    <section class="reviewFormContainer">
+      <div class="header"><h1><%= data["business_name"] %></h1></div>
+      <form id="mainForm" action="/api/review" method="post">
+        <!-- Hidden input for the business -->
+        <% if(data){ %> <input type="hidden" name="business_id"
+        value="<%-data["business_id"]%>"> <% } %>
+
+        <!-- Star rating section -->
+        <div class="star-rating">
+          <input
+            type="radio"
+            name="starCount"
+            id="star5"
+            value="5"
+            aria-label="5 stars"
+          /><label for="star5">★</label>
+          <input
+            type="radio"
+            name="starCount"
+            id="star4"
+            value="4"
+            aria-label="4 stars"
+          /><label for="star4">★</label>
+          <input
+            type="radio"
+            name="starCount"
+            id="star3"
+            value="3"
+            aria-label="3 stars"
+          /><label for="star3">★</label>
+          <input
+            type="radio"
+            name="starCount"
+            id="star2"
+            value="2"
+            aria-label="2 stars"
+          /><label for="star2">★</label>
+          <input
+            type="radio"
+            name="starCount"
+            id="star1"
+            value="1"
+            aria-label="1 star"
+            checked
+          /><label for="star1">★</label>
+        </div>
+
+        <!-- Suggestions with hidden checkboxes -->
+        <div class="suggestions" id="suggestion">
+          <!-- <div class="suggestion">
+      <input type="checkbox" id="suggestion1" name="suggestion1"  >
+      <label for="suggestion1">Service was excellent</label>
+    </div>
+    <div class="suggestion">
+      <input type="checkbox" id="suggestion2" name="suggestion2">
+      <label for="suggestion2">Prices are reasonable</label>
+    </div> -->
+        </div>
+        <form>
+          <!-- Review text area -->
+          <textarea
+            name="textReview"
+            id="review"
+            placeholder="Your Review"
+          ></textarea>
+
+          <!-- Dropdown for selecting review summaries -->
+          <label for="summaryDropdown">Select a Summary:</label>
+          <select id="summaryDropdown">
+            <option value="">-- Select Review Platform --</option>
+            <option value="">Google Review</option>
+            <option value="">Instagram Post</option>
+            <option value="">Facebook Post</option>
+            <option value="">X Post</option>
+          </select>
+          <div class="social-media">
+            <a href="#"><span>Facebook</span></a>
+            <a href="#"><span>Twitter</span></a>
+            <a href="#"><span>Google+</span></a>
+            <a href="#"><span>Github</span></a>
+            <a href="#"><span>Dribbble</span></a>
+            <a href="#"><span>CodePen</span></a>
+          </div>
+          <!-- Submit button -->
+          <input type="submit" value="Submit" />
+        </form>
+      </form>
+
+      <div class="air air1"></div>
+      <div class="air air2"></div>
+      <div class="air air3"></div>
+      <div class="air air4"></div>
+    </section>
+
+    <script>
+        function change(value){
+          document.getElementById("review").value = value;
+        }
+        function updateSummaryDropdown(starRating) {
+          var data = <%-JSON.stringify(data)%> // Convert your server-side data to a JavaScript object
+          data = data.generated;
+          const summaries = data[starRating + 'star']; // Access the correct star rating reviews
+          const summaryDropdown = document.getElementById("summaryDropdown");
+          AOS.init();
+
+
+
+        var optionialReviews='';
+        var i=0;
+        // Add new options
+        Object.keys(summaries).forEach((key, index) => {
+          const review = summaries[key];
+          const option = document.createElement('option');
+          option.value = review.review;
+          option.textContent = review.summary;
+          // summaryDropdown.appendChild(option);
+
+            optionialReviews+= `
+            <div class="suggestion">
+            <input type="radio" id="suggestion${i}" name="suggestion" value="${review.review}" >
+            <label class="suggestion${i} flagClassName" data-aos="${index % 2 === 0 ? 'fade-right' : 'fade-left'}" for="suggestion${i}">${review.summary}</label>
+          </div>`
+          i+=1;
+        });
+
+        document.getElementById('suggestion').innerHTML= optionialReviews;
+        document.querySelectorAll('.suggestion input[type="radio"]').forEach((radio, index) => {
+        radio.addEventListener('change', function() {
+          if (this.checked) {
+            console.log(this)
+            // document.getElementById('suggestion').get
+            // console.log()
+            let labelClassName = this.getAttribute('id');
+            document.getElementsByClassName(this.getAttribute('id'))[0].classList.add('changeBg');
+            document.querySelectorAll('.flagClassName').forEach(labelTag => {
+              if(!labelTag.classList.contains(labelClassName)) {
+                labelTag.classList.remove('changeBg')
+              } 
+            });
+            console.log(document.getElementsByClassName(this.getAttribute('id'))[0])
+            setTextWithInterval(this.value);
+            navigator.clipboard.writeText(this.value).then(() => {
+              console.log('Text copied to clipboard');
+              notify("Your review has been copied to clipboard ! now you can paste it");
+          }).catch(err => {
+              console.error('Error in copying text: ', err);
+          });
+          }
+        });
+      });
+      }
+
+      // Event listener for star rating changes
+      document.querySelectorAll('.star-rating input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          updateSummaryDropdown(this.value);
+          AOS.init();
+        });
+      });
+
+      // Event listener for summary dropdown change
+
+
+      // Initialize the dropdown with the default star rating
+      updateSummaryDropdown('1');
+      var lockWrite=false;
+function setTextWithInterval(text){
+  
+  var reviewEle=document.getElementById("review")
+ 
+  var text=text;
+  let i=0;
+  const typeWriter =()=>{
+    if(i<text.length){
+      reviewEle.value+=text.charAt(i);
+      i++;
+      
+      setTimeout(typeWriter,25);
+    }
+    else{
+      lockWrite=false;
+    }
+  }
+if(lockWrite==false){
+  reviewEle.value='';
+  lockWrite=true;
+    typeWriter();
+  }
+  
+  
+  
+}
+
+      function notify(text){
+        var notification = document.getElementById('notification');
+          notification.classList.add('show');
+              notification.classList.remove('hide');
+              notification.innerText=text;
+
+              // Hide the notification after 3 seconds
+              setTimeout(function() {
+                  notification.classList.add('hide');
+                  notification.classList.remove('show');
+              }, 3000);
+      }
+
+
+
+
+      ///  typi;ng
+    </script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

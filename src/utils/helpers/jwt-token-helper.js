@@ -7,7 +7,7 @@ export function signAccessToken(userId) {
     { _id: userId },
     jwtSecretKey,
     {
-      expiresIn: '1h',
+      expiresIn: '36000000',
     }
   );
   return accessToken;
@@ -17,7 +17,7 @@ export function signRefreshToken(userId) {
     { _id: userId },
     refreshTokenSecretKey,
     {
-      expiresIn: '7d',
+      expiresIn: '604800000',
     }
   );
   return refreshToken;
@@ -27,7 +27,7 @@ export function signConfirmCodeToken(userId, confirmCode) {
     { _id: userId, code: confirmCode },
     jwtSecretKey,
     {
-      expiresIn: '5m',
+      expiresIn: '7200000',//2 hours
     }
   );
   return confirmCodeToken;

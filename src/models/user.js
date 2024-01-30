@@ -18,8 +18,8 @@ const userSchema = new Schema({
   name: {
     type: String, required: true
   },
-  /*NOTE: If you are using admin panel and controllers specific to admin panel,
-      you can control the authority of users with the help of this field.*/
+  business_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Business' }],
+  business_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Business' },
   type: {
     type: String,
     enum: ['admin', 'user', 'reader', 'creator'],
@@ -27,13 +27,12 @@ const userSchema = new Schema({
   },
   language: {
     type: String,
-    enum: ['tr', 'en'],
+    enum: ['tr', 'en','hin'],
     default: 'en',
   },
   isPremium: {
     type: Boolean, default: false
   },
-  //NOTE: You can change the gender options acc. to your needs in the app.
   gender: {
     type: String,
     enum: ['male', 'female', 'other']
@@ -50,7 +49,7 @@ const userSchema = new Schema({
   photoUrl: {
     type: String,
     default:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png',
+      'https://plus.unsplash.com/premium_photo-1677626376739-e46c7e5994cb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   //NOTE: To check whether the account is active or not. When user deletes the account, you can store the information anonymously.
   isActivated: {
@@ -68,7 +67,7 @@ const userSchema = new Schema({
   //NOTE: You can add more options acc. to your need.
   platform: {
     type: String,
-    enum: ['Android', 'IOS'],
+    enum: ['Android', 'IOS','Windows','MAC','LINUX','PC'],
     required: true
   },
   //NOTE: In case the user delete its account, you can store its non-personalized information anonymously.

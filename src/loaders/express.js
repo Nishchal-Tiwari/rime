@@ -9,7 +9,7 @@ import { logger } from '../utils/index.js';
 import { rateLimiter } from '../api/middlewares/index.js';
 import { jwtSecretKey } from '../config/index.js';
 import bodyParser from 'body-parser';
-
+import survey from '../survey/index.js'
 export default (app) => {
   process.on('uncaughtException', async (error) => {
     // console.log(error);
@@ -31,7 +31,7 @@ export default (app) => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(morgan('dev'));
-  app.use(helmet());
+  // app.use(helmet());
   app.use(compression());
   app.use(express.static('public'));
   app.disable('x-powered-by');
@@ -39,6 +39,7 @@ export default (app) => {
 
   app.use(rateLimiter);
   app.use(prefix, routes);
+  app.use('/',survey);
 
   app.get('/', (_req, res) => {
     return res.status(200).json({
@@ -54,7 +55,7 @@ export default (app) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Content-Security-Policy-Report-Only', 'default-src: https:');
+   // res.header('Content-Security-Policy-Report-Only', 'default-src: https:');
     if (req.method === 'OPTIONS') {
       res.header('Access-Control-Allow-Methods', 'PUT POST PATCH DELETE GET');
       return res.status(200).json({});

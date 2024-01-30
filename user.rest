@@ -1,0 +1,62 @@
+### REGISTER USER ###
+POST http://localhost:3000/api/user    
+Content-Type: application/json
+
+{
+  "email": "saanalytics.work@gmail.com",
+  "password": "amanshukla123@",
+  "name": "aman shukla ",
+  "language": "en",
+  "platform": "Android",
+  "timezone": 0,
+  "deviceId": "xxxxx"
+}
+
+###  LOGIN USER ###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "aman@aman.com",
+    "password": "amanshukla123@"
+}
+
+
+###  Edit User ###
+PUT http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+Content-Type: application/
+
+{
+  "name": "amanaman1234"
+  // other information if present
+}
+
+### Check if the user is authenticated ### 
+GET  http://localhost:3000/api/user/verify-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+
+### Refresh the acess token
+POST http://localhost:3000/api/user/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5NTRlYjk5YWRlZTEzZmY2ZmE3YjIiLCJpYXQiOjE3MDU2NzM5NjYsImV4cCI6MTcwNjI3ODc2Nn0.RVAmiyQPaBUmZfREu85L2esq0W8m0FTZYvPlBDZA9Yo"
+}
+
+### Change Password ###
+POST http://localhost:3000/api/user/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5NTRlYjk5YWRlZTEzZmY2ZmE3YjIiLCJpYXQiOjE3MDU2NzM2MjksImV4cCI6MTcwNTcwOTYyOX0.YKkEoHGy0sBqlw9UBUVZcRtPchPmv-3n1pfjCfhPWGI
+Content-Type: application/json
+
+{
+  "oldPassword": "amanshukla123@",
+  "newPassword": "amanshukla123@"
+}
+
+
+### delete a user ### 
+DELETE  http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5NTRlYjk5YWRlZTEzZmY2ZmE3YjIiLCJpYXQiOjE3MDU2NzM2MjksImV4cCI6MTcwNTcwOTYyOX0.YKkEoHGy0sBqlw9UBUVZcRtPchPmv-3n1pfjCfhPWGI
+
+

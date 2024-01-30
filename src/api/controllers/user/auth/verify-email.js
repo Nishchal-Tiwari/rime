@@ -7,15 +7,15 @@ import pkg from 'jsonwebtoken';
 const { verify } = pkg;
 
 export default async (req, res) => {
-  const { error } = validateVerifyEmail(req.body);
-  if (error) return res.status(400).json(errorHelper('00053', req, error.details[0].message));
+  //const { error } = validateVerifyEmail(req.body);
+  //if (error) return res.status(400).json(errorHelper('00053', req, error.details[0].message));
 
   try {
-    req.user = verify(req.body.token, jwtSecretKey);
+    req.user = verify(req.query.token, jwtSecretKey);
   } catch (err) {
     return res.status(400).json(errorHelper('00055', req, err.message));
   }
-
+try{
   const exists = await User.exists({ _id: req.user._id, isActivated: true })
     .catch((err) => {
       return res.status(500).json(errorHelper('00051', req, err.message));
@@ -23,7 +23,7 @@ export default async (req, res) => {
 
   if (!exists) return res.status(400).json(errorHelper('00052', req));
 
-  if (req.body.code !== req.user.code) return res.status(400).json(errorHelper('00054', req));
+  //if (req.body.code !== req.user.code) return res.status(400).json(errorHelper('00054', req));
 
   await User.updateOne({ _id: req.user._id }, { $set: { isVerified: true } })
     .catch((err) => {
@@ -51,10 +51,15 @@ export default async (req, res) => {
     });
 
   logger('00058', req.user._id, getText('en', '00058'), 'Info', req);
-  return res.status(200).json({
-    resultMessage: { en: getText('en', '00058'), tr: getText('tr', '00058') },
-    resultCode: '00058', accessToken, refreshToken
-  });
+  // return res.status(200).json({
+  //   resultMessage: { en: getText('en', '00058'), tr: getText('tr', '00058') },
+  //   resultCode: '00058', accessToken, refreshToken
+  // });
+  return res.status(200).json({message:'success', })
+ // return res.redirect('http://localhost:3000/');
+}catch(err){
+  res.status(500).json({ error: err.message });
+}
 };
 
 /**
