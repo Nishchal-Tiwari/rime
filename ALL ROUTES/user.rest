@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "email": "saanalytics.work@gmail.com",
-  "password": "amanshukla123@",
-  "name": "aman shukla ",
+  "password": "Saanalytics",
+  "name": "SA Analytics AC1",
   "language": "en",
   "platform": "Android",
   "timezone": 0,
@@ -17,24 +17,23 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "aman@aman.com",
-    "password": "amanshukla123@"
+    "email": "saanalytics.work@gmail.com",
+    "password": "Saanalytics"
 }
-
 
 ###  Edit User ###
 PUT http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
-Content-Type: application/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDYzNjlmYjNlZTYwZWY3N2IzOGQiLCJpYXQiOjE3MDcwNzExMTMsImV4cCI6MTcwNzEwNzExM30.tyU-GjgLUhneiGe1MyYlFhDUxxDXfDSl4OCMwoLg2I8
+Content-Type: application/json
 
 {
-  "name": "amanaman1234"
+  "name": "SA ANALYTICS AC1"
   // other information if present
 }
 
 ### Check if the user is authenticated ### 
 GET  http://localhost:3000/api/user/verify-token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDYyNzU3OTcsImV4cCI6MTcwNjMxMTc5N30.VFynXtBPaWlXGYHx4TDr-pdPYsN6TeFS6ecbC9NIJAs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjg3OTksImV4cCI6MTcwNzEwNDc5OX0.RQT_gl-5rfaU6yiOLcCdM8UZT3qjVs9gmgblFZyqcP4
 
 ### Refresh the acess token
 POST http://localhost:3000/api/user/refresh-token
@@ -54,9 +53,9 @@ Content-Type: application/json
   "newPassword": "amanshukla123@"
 }
 
-
 ### delete a user ### 
 DELETE  http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5NTRlYjk5YWRlZTEzZmY2ZmE3YjIiLCJpYXQiOjE3MDU2NzM2MjksImV4cCI6MTcwNTcwOTYyOX0.YKkEoHGy0sBqlw9UBUVZcRtPchPmv-3n1pfjCfhPWGI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjg3OTksImV4cCI6MTcwNzEwNDc5OX0.RQT_gl-5rfaU6yiOLcCdM8UZT3qjVs9gmgblFZyqcP4
+
 
 

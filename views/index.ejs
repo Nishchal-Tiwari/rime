@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Survey Sphere</title>
+    <title>RI-ME</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
@@ -11,9 +11,7 @@
         margin: 0;
         background: linear-gradient(
           -45deg,
-          /* #ee7752, */
-          /* #e73c7e, */
-          #23a6d5,
+          /* #ee7752, */ /* #e73c7e, */ #23a6d5,
           #94d523,
           yellow
         );
@@ -133,13 +131,24 @@
       textarea {
         box-sizing: border-box;
         width: 100%;
-        padding: 10px;
+        padding: 15px; /* Increased padding for better text readability */
         margin-top: 10px;
         margin-bottom: 20px;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        min-height: 100px;
-        resize: vertical;
+        border-radius: 8px; /* Slightly larger radius for a softer look */
+        border: 1px solid #ccc; /* Lighter border color for less visual weight */
+        background-color: #f9f9f9; /* Light background color to differentiate from the page */
+        min-height: 150px; /* Increased minimum height for more initial writing space */
+        resize: vertical; /* Keeps the resizing to vertical only */
+        outline: none; /* Removes the default focus outline */
+        transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for interactions */
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Modern, readable font */
+      }
+      .suggestion input[type="radio"]:hover + label {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      textarea:focus {
+        border-color: #94d523; /* Highlight color when focused */
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Subtle glow effect on focus */
       }
 
       .suggestions .suggestion {
@@ -158,25 +167,11 @@
         cursor: pointer;
         transition: background-color 0.3s;
       }
-
       .suggestion input[type="radio"]:checked + label {
-        background-color: white;
+        background-color: #94d523;
         color: white;
       }
 
-      input[type="submit"] {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #0056b3;
-      }
       body {
         font-family: "Arial", sans-serif;
         background-color: #f4f7f6;
@@ -215,7 +210,38 @@
         transition: color 0.3s ease;
       }
 
-      textarea,
+      select {
+        width: 100%;
+        padding: 15px 20px; /* Increased padding for better ergonomics */
+        margin: 10px 0; /* Adjusted margin for better spacing */
+        display: block; /* Ensures full width, consider keeping inline-block if needed for layout */
+        border-radius: 8px; /* Softer border-radius for a modern look */
+        border: 1px solid #bbb; /* Lighter border for subtlety */
+        box-sizing: border-box; /* Keeps padding and border inside width */
+        background-color: white; /* Ensures a consistent background */
+        cursor: pointer; /* Changes cursor to pointer to indicate selectability */
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Modern, readable font */
+        font-size: 16px; /* Improved readability */
+        color: #333; /* Default text color for better contrast */
+        -webkit-appearance: none; /* Removes default styling on WebKit browsers */
+        -moz-appearance: none; /* Removes default styling on Mozilla browsers */
+        appearance: none; /* Standard way to remove default arrow, for custom styling */
+        background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path fill="%23333" d="M2048 384v128H0V384h2048zm0 640V896H0v128h2048zm0 640v-128H0v128h2048z"/></svg>'); /* Custom dropdown arrow */
+        background-repeat: no-repeat, repeat; /* Makes sure the arrow image does not repeat */
+        background-position: right 20px top 50%, 0 0; /* Positions the arrow on the right */
+        background-size: 12px 12px; /* Size of the custom arrow */
+        transition: border-color 0.3s ease; /* Smooth transition for border color */
+      }
+      select:hover {
+        border-color: #94d523; /* Darker border on hover for feedback */
+      }
+
+      select:focus {
+        border-color: #94d523; /* Focus color to indicate active selection */
+        outline: none; /* Removes default focus outline */
+        box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.2); /* Subtle shadow to highlight focus */
+      }
+
       select {
         width: 100%;
         padding: 12px 20px;
@@ -262,7 +288,7 @@
         }
 
         #mainForm {
-          width: 100%;
+          width: 80%;
         }
       }
 
@@ -316,7 +342,7 @@
         animation: icon-animation 2s infinite;
       }
       .header {
-        /* background-color: #4caf50; */
+        /* background-color: #4caf50 !important; */
         padding: 15px;
         text-align: center;
         /* margin: ; */
@@ -324,128 +350,25 @@
         z-index: 20000;
         width: 98vw;
         top: 0;
+       
       }
       .header h1 {
         text-align: center;
         margin: 0;
         padding: 0;
-        color: white !important;
+        color: white ;
         font-family: Georgia, "Times New Roman", Times, serif;
         text-transform: capitalize;
-      }
-
-      /* socialmedia */
-
-      .social-media {
-        /* -ms-transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%); */
-        z-index: 10;
-      }
-
-      /* Icons */
-
-      .social-media a {
-        color: #fff;
-        background: #a4e81c;
-        border-radius: 4px;
-        text-align: center;
-        text-decoration: none;
-        font-family: fontawesome;
-        position: relative;
-        display: inline-block;
-        width: 40px;
-        height: 28px;
-        padding-top: 12px;
-        margin: 0 2px;
-        -o-transition: all 0.5s;
-        -webkit-transition: all 0.5s;
-        -moz-transition: all 0.5s;
-        transition: all 0.5s;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      .social-media a:hover {
-        background: #28a901;
-      }
-
-      /* pop-up text */
-
-      .social-media a span {
-        z-index: 10;
-        color: #666;
-        position: absolute;
-        font-family: sans-serif;
-        bottom: 0;
-        left: -25px;
-        right: -25px;
-        padding: 5px 7px;
-        z-index: 10;
-        font-size: 14px;
-        border-radius: 2px;
-        background: #a4e81c;
-        visibility: hidden;
-        opacity: 0;
-        -o-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        -moz-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      }
-
-      /* pop-up text arrow */
-
-      .social-media a span:before {
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #fff;
-        position: absolute;
-        bottom: -5px;
-        left: 40px;
-      }
-
-      /* text pops up when icon is in hover state */
-
-      .social-media a:hover span {
-        bottom: 50px;
-        visibility: visible;
-        opacity: 1;
-      }
-
-
-      /* font awesome icons */
-
-      .social-media a:nth-of-type(1):before {
-        content: "😃";
-      }
-      .social-media a:nth-of-type(2):before {
-        content: "🐦‍⬛";
-      }
-      .social-media a:nth-of-type(3):before {
-        content: "📿";
-      }
-      .social-media a:nth-of-type(4):before {
-        content: "\f113";
-      }
-      .social-media a:nth-of-type(5):before {
-        content: "\f17d";
-      }
-      .social-media a:nth-of-type(6):before {
-        content: "\f1cb";
-      }
-
-      .changeBg {
-        background-color: #4caf4fe7 !important;
-        color: white !important;
+        color: #ffffff75;
       }
     </style>
   </head>
   <body>
+    <!-- Notification -->
     <div id="notification" class="notification">
       <p>Here is your notification!</p>
     </div>
+
     <section class="reviewFormContainer">
       <div class="header"><h1><%= data["business_name"] %></h1></div>
       <form id="mainForm" action="/api/review" method="post">
@@ -492,48 +415,18 @@
             checked
           /><label for="star1">★</label>
         </div>
-
-        <!-- Suggestions with hidden checkboxes -->
-        <div class="suggestions" id="suggestion">
-          <!-- <div class="suggestion">
-      <input type="checkbox" id="suggestion1" name="suggestion1"  >
-      <label for="suggestion1">Service was excellent</label>
-    </div>
-    <div class="suggestion">
-      <input type="checkbox" id="suggestion2" name="suggestion2">
-      <label for="suggestion2">Prices are reasonable</label>
-    </div> -->
-        </div>
-        <form>
-          <!-- Review text area -->
-          <textarea
-            name="textReview"
-            id="review"
-            placeholder="Your Review"
-          ></textarea>
-
-          <!-- Dropdown for selecting review summaries -->
-          <label for="summaryDropdown">Select a Summary:</label>
-          <select id="summaryDropdown">
-            <option value="">-- Select Review Platform --</option>
-            <option value="">Google Review</option>
-            <option value="">Instagram Post</option>
-            <option value="">Facebook Post</option>
-            <option value="">X Post</option>
-          </select>
-          <div class="social-media">
-            <a href="#"><span>Facebook</span></a>
-            <a href="#"><span>Twitter</span></a>
-            <a href="#"><span>Google+</span></a>
-            <a href="#"><span>Github</span></a>
-            <a href="#"><span>Dribbble</span></a>
-            <a href="#"><span>CodePen</span></a>
-          </div>
-          <!-- Submit button -->
-          <input type="submit" value="Submit" />
-        </form>
+        <div class="suggestions" id="suggestion"></div>
+        <textarea
+          name="textReview"
+          id="review"
+          placeholder="Your Review"
+        ></textarea>
+        <label for="summaryDropdown">Select a Summary:</label>
+        <select id="summaryDropdown" name="platform">
+        </select>
+        <input type="submit" value="Submit" />
       </form>
-
+      <!-- Air Waves  -->
       <div class="air air1"></div>
       <div class="air air2"></div>
       <div class="air air3"></div>
@@ -541,18 +434,29 @@
     </section>
 
     <script>
-        function change(value){
-          document.getElementById("review").value = value;
-        }
+      const SocialMediaNames={
+        'google':'Google Review',
+        'twitter':'Twitter Post',
+        'facebook':'Facebook Page Review',
+        'instagram':'Instagram page Review',
+        'glassdoor':'Glassdoor page Review',
+      }
         function updateSummaryDropdown(starRating) {
-          var data = <%-JSON.stringify(data)%> // Convert your server-side data to a JavaScript object
-          data = data.generated;
-          const summaries = data[starRating + 'star']; // Access the correct star rating reviews
-          const summaryDropdown = document.getElementById("summaryDropdown");
-          AOS.init();
 
-
-
+        let  {generated:data,activePlatforms} = <%-JSON.stringify(data)%> // Convert your server-side data to a JavaScript object
+        console.log(activePlatforms)
+        const summaryDropdown = document.getElementById("summaryDropdown");
+        summaryDropdown.innerHTML = '<option value="">-- Select Review Platform --</option>';
+        for(let socialmedia in SocialMediaNames){
+          if(activePlatforms.includes(socialmedia)){
+            let option = document.createElement("option");
+            option.value = socialmedia;
+            option.textContent = SocialMediaNames[socialmedia];
+            summaryDropdown.appendChild(option);
+          }
+        }
+        
+        const summaries = data[starRating + 'star']; // Access the correct star rating reviews
         var optionialReviews='';
         var i=0;
         // Add new options
@@ -561,38 +465,36 @@
           const option = document.createElement('option');
           option.value = review.review;
           option.textContent = review.summary;
-          // summaryDropdown.appendChild(option);
+         
+          const aosAnimation = index % 3 === 0 ? 'fade-up' : (index % 3 === 1 ? 'zoom-in' : 'flip-left');
+          const delay = index * 100; // Adjust the delay here, e.g., 100ms increment for each item
 
-            optionialReviews+= `
-            <div class="suggestion">
-            <input type="radio" id="suggestion${i}" name="suggestion" value="${review.review}" >
-            <label class="suggestion${i} flagClassName" data-aos="${index % 2 === 0 ? 'fade-right' : 'fade-left'}" for="suggestion${i}">${review.summary}</label>
-          </div>`
-          i+=1;
+          optionialReviews += `
+            <div class="suggestion" data-aos="${aosAnimation}" data-aos-delay="${delay}">
+              <input type="radio" id="suggestion${index}" name="suggestion" value="${review.review}">
+              <label for="suggestion${index}" class="suggestion${index} flagClassName">${review.summary}</label>
+            </div>`;
         });
-
         document.getElementById('suggestion').innerHTML= optionialReviews;
         document.querySelectorAll('.suggestion input[type="radio"]').forEach((radio, index) => {
         radio.addEventListener('change', function() {
-          if (this.checked) {
-            console.log(this)
-            // document.getElementById('suggestion').get
-            // console.log()
+          if (this.checked)
+          {
             let labelClassName = this.getAttribute('id');
             document.getElementsByClassName(this.getAttribute('id'))[0].classList.add('changeBg');
             document.querySelectorAll('.flagClassName').forEach(labelTag => {
               if(!labelTag.classList.contains(labelClassName)) {
                 labelTag.classList.remove('changeBg')
-              } 
+              }
             });
             console.log(document.getElementsByClassName(this.getAttribute('id'))[0])
             setTextWithInterval(this.value);
             navigator.clipboard.writeText(this.value).then(() => {
               console.log('Text copied to clipboard');
               notify("Your review has been copied to clipboard ! now you can paste it");
-          }).catch(err => {
-              console.error('Error in copying text: ', err);
-          });
+            }).catch(err => {
+                console.error('Error in copying text: ', err);
+            });
           }
         });
       });
@@ -606,40 +508,27 @@
         });
       });
 
-      // Event listener for summary dropdown change
 
-
-      // Initialize the dropdown with the default star rating
-      updateSummaryDropdown('1');
-      var lockWrite=false;
-function setTextWithInterval(text){
-  
-  var reviewEle=document.getElementById("review")
- 
-  var text=text;
-  let i=0;
-  const typeWriter =()=>{
-    if(i<text.length){
-      reviewEle.value+=text.charAt(i);
-      i++;
-      
-      setTimeout(typeWriter,25);
-    }
-    else{
-      lockWrite=false;
-    }
-  }
-if(lockWrite==false){
-  reviewEle.value='';
-  lockWrite=true;
-    typeWriter();
-  }
-  
-  
-  
-}
-
-      function notify(text){
+      //Helpers
+      let token=0;
+      async function setTextWithInterval(text)
+      {
+          const currentToken=++token;
+          var reviewEle=document.getElementById("review")
+          reviewEle.value='';
+          var typeWriterRunning=false;
+          var text=text;
+          let i=0;
+          for(let i=0;i<text.length;i++){
+            if(token!=currentToken){
+              return;
+            }
+            reviewEle.value+=text.charAt(i);
+            await sleep(15);
+          }
+      }
+      function notify(text)
+      {
         var notification = document.getElementById('notification');
           notification.classList.add('show');
               notification.classList.remove('hide');
@@ -651,11 +540,20 @@ if(lockWrite==false){
                   notification.classList.remove('show');
               }, 3000);
       }
+      function sleep(time)
+        {
+          return new Promise((resolve,reject)=>
+          {
+            setTimeout(()=>
+            {
+              resolve();
+            },
+            time)
+          })
+        }
 
-
-
-
-      ///  typi;ng
+      //Initial Callers
+      updateSummaryDropdown('1');
     </script>
     <script>
       AOS.init();

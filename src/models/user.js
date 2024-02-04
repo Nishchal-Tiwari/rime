@@ -67,12 +67,16 @@ const userSchema = new Schema({
   //NOTE: You can add more options acc. to your need.
   platform: {
     type: String,
-    enum: ['Android', 'IOS','Windows','MAC','LINUX','PC'],
+    enum: ['Android', 'IOS','Windows','MAC','LINUX','PC','web'],
     required: true
   },
   //NOTE: In case the user delete its account, you can store its non-personalized information anonymously.
   deletedAt: {
     type: Date
+  }
+  ,stripeCustomerId: {
+    type: String
+  ,required: true
   }
 },
   {

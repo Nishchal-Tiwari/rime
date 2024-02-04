@@ -84,87 +84,85 @@ app.listen(port, err => {
 
 
 
-app.post(
-  "/stripe-webhook",
-  express.raw({ type: "application/json" }),
-  async (request, response) => {
-    const sig = request.headers["stripe-signature"];
+// Webhook to handle post-payment logic
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
 
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+  let event;
 
-      if (event.type === "checkout.session.completed") {
-        const session = event.data.object;
-        let userEmail = session.customer_email;
-
-        if (!userEmail) {
-          const customer = await stripe.customers.retrieve(session.customer);
-          userEmail = customer.email;
-        }
-
-        if (!userEmail) {
-          console.error("User email not found in session or customer object");
-          return response.status(400).send("Email not found");
-        }
-
-        const subscriptionId = session.subscription;
-        const customerId = session.customer;
-        let planId = null;
-
-        // Fetch the subscription to get the plan ID
-        const subscription = await stripe.subscriptions.retrieve(
-          subscriptionId
-        );
-        if (
-          subscription &&
-          subscription.items &&
-          subscription.items.data.length > 0
-        ) {
-          planId = subscription.items.data[0].plan.id;
-        }
-
-        let userRef = db.collection("users").doc(userEmail);
-        await userRef.update({
-          // stripeCustomerId: customerId,
-          // subscriptionId: subscriptionId,
-          subscriptionStatus: "active",
-          subscribedPlanId: planId,
-        });
-      } else if (
-        event.type === "customer.subscription.updated" ||
-        event.type === "customer.subscription.deleted"
-      ) {
-        const subscription = event.data.object;
-        let userEmail = subscription.customer_email;
-
-        if (!userEmail) {
-          const customer = await stripe.customers.retrieve(
-            subscription.customer
-          );
-          userEmail = customer.email;
-        }
-
-        const subscriptionId = subscription.id;
-        const planId = subscription.items.data[0].plan.id;
-        const subscriptionStatus =
-          event.type === "customer.subscription.deleted"
-            ? "cancelled"
-            : "active";
-
-        let userRef = db.collection("users").doc(userEmail);
-        await userRef.update({
-          subscriptionId: subscriptionId,
-          subscriptionStatus: subscriptionStatus,
-          subscribedPlanId: planId,
-        });
-      }
-
-      response.json({ received: true });
-    } catch (err) {
-      console.error(`Webhook Error: ${err.message}`);
-      response.status(400).send(`Webhook Error: ${err.message}`);
-    }
+  try {
+      event = stripe.webhooks.constructEvent(req.body, sig, 'your_stripe_webhook_secret');
+  } catch (err) {
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
   }
-);
+
+  // Handle successful checkout session
+  if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+
+      try {
+          const customer_id = session.customer;
+          const subscription_id = session.subscription;
+
+          // Save subscription details to your database
+          const newSubscription = new Subscription({
+              business: customer_id, // Assuming business model has a reference to customer_id
+              stripeSubscriptionId: subscription_id,
+              status: "active" // or other relevant fields
+          });
+          await newSubscription.save();
+
+          // Success response
+          res.json({ received: true });
+      } catch (error) {
+          // If saving to DB fails, consider refunding
+          await stripe.refunds.create({
+              charge: session.latest_invoice.payment_intent.charges.data[0].id
+          });
+
+          // Send failure email
+          const mailOptions = {
+              from: 'your_email_address',
+              to: 'customer_email', // You need to obtain customer's email address
+              subject: 'Subscription Creation Failed',
+              text: 'Your subscription could not be processed. We have issued a refund.'
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                  console.log(error);
+              } else {
+                  console.log('Email sent: ' + info.response);
+              }
+          });
+
+          res.status(500).json({ error: error.message });
+      }
+  } else {
+      // Handle other event types
+      res.json({ received: true });
+  }
+});
+// app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
+//   const event = request.body;
+
+//   switch (event.type) {
+//       case 'checkout.session.completed':
+//           const session = event.data.object;
+//           // Handle successful checkout session completion
+//           // e.g., update user subscription status in your database
+//           break;
+//       case 'invoice.paid':
+//           // Handle successful payment of an invoice
+//           break;
+//       case 'invoice.payment_failed':
+//           // Handle payment failure
+//           break;
+//       // Add more event types as needed
+//   }
+
+//   // Return a response to acknowledge receipt of the event
+//   response.status(200).json({received: true});
+// });
+
 export default app

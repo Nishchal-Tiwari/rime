@@ -22,7 +22,7 @@ export default async (req, res) => {
 
   logger('00092', req.user._id, getText('en', '00092'), 'Info', req);
   return res.status(200).json({
-    resultMessage: { en: getText('en', '00092'), tr: getText('tr', '00092') },
+    message:getText('en', '00092'),
     resultCode: '00092'
   });
 };

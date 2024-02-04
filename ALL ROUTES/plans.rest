@@ -1,0 +1,29 @@
+###  LOGIN USER ###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "saanalytics.work@gmail.com",
+    "password": "Saanalytics"
+}
+
+### GET ALL PLANS ###
+GET http://localhost:3000/api/admin/getplans
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmY2U1MTM1Zjc1MmY5YWNmOWFiNGYiLCJpYXQiOjE3MDcwNjkxMjAsImV4cCI6MTcwNzEwNTEyMH0.9utFwIO1-Bm7gz5yvauJwZDYaAyYFlNpCLn5gLagWAQ
+### GET ALL PLANS ###
+GET http://localhost:3000/api/payment/listPlans
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmY2U1MTM1Zjc1MmY5YWNmOWFiNGYiLCJpYXQiOjE3MDcwNjkxMjAsImV4cCI6MTcwNzEwNTEyMH0.9utFwIO1-Bm7gz5yvauJwZDYaAyYFlNpCLn5gLagWAQ
+
+### UPDATE PLANS ###
+POST http://localhost:3000/api/admin/update-plan
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmY2U1MTM1Zjc1MmY5YWNmOWFiNGYiLCJpYXQiOjE3MDcwNjkxMjAsImV4cCI6MTcwNzEwNTEyMH0.9utFwIO1-Bm7gz5yvauJwZDYaAyYFlNpCLn5gLagWAQ
+Content-Type: application/json
+
+{
+    "name": "Basic Plan",
+    "price": "10000",
+    "trialDays": 20,
+    "planId": "price_1OgA78SFypkk6r7ECJjxsBL5"
+     
+}
+

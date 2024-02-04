@@ -1,0 +1,71 @@
+POST http://localhost:3000/api/user    
+Content-Type: application/json
+
+{
+  "email": "saanalytics.admin@gmail.com",
+  "password": "12345678",
+  "name": "SA ANALYTICS",
+  "language": "en",
+  "platform": "Android",
+  "timezone": 0,
+  "deviceId": "xxxxx",
+  "type":"admin"
+}
+###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "saanalytics.admin@gmail.com",
+    "password": "12345678"
+}
+### Get All Users ###
+GET http://localhost:3000/api/admin/allusers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+
+### Get A Single User With UID ###
+POST http://localhost:3000/api/admin/getuser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+Content-Type: application/json
+
+{
+    "uid":"65bfd6369fb3ee60ef77b38d"
+}
+
+### DISABLE A USER ###
+POST http://localhost:3000/api/admin/disableuser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+Content-Type: application/json
+
+{
+    "uid":"65bfd6369fb3ee60ef77b38d"
+}
+
+###
+POST http://localhost:3000/api/admin/enableuser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+Content-Type: application/json
+
+{
+    "uid":"65bfd6369fb3ee60ef77b38d"
+}
+###
+POST http://localhost:3000/api/admin/getuserreviews
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+Content-Type: application/json
+
+{
+    "uid":"65bfd6369fb3ee60ef77b38d"
+}
+###
+POST http://localhost:3000/api/admin/getuserbusinesseinfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+Content-Type: application/json
+
+{
+    "uid":"65bfce5135f752f9acf9ab4f"
+}
+###
+GET http://localhost:3000/api/admin/getPlans
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+

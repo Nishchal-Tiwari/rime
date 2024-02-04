@@ -2,14 +2,17 @@ import express from 'express';
 import business from '../models/business.js';
 import generateAIReviews from  '../utils/ai/index.js';
 const router = express.Router();
-
+import mongoose from 'mongoose';
 router.get('/feedback',async  function (req, res){
   const business_id = req.query.business_id;
   console.log(business_id);
+  if(!mongoose.Types.ObjectId.isValid(business_id)|| business ==null){
+    return res.render('nohotelfound');
+  }
   try {
     const bn = await business.findOne({business_id: business_id});
     if(!bn){
-      return res.status(404).json({ message: 'business not found' });
+      return res.render('nohotelfound');
     }
     const business_description = bn.description
     const business_name = bn.name
@@ -19,8 +22,10 @@ router.get('/feedback',async  function (req, res){
     const facebook_id = bn.facebook_id
     const instagram_id = bn.instagram_id
     const x_id = bn.x_id
+    const activePlatforms=bn.activePlatforms
+    const activeAI=bn.activeAI
 
-  //  const generatedReviews = await generateAIReviews(business_description,business_customAIDescription,business_name);
+  //  const generatedd = await generateAIReviews(business_description,business_customAIDescription,business_name,activeAI);
   const generated={
     '1star': {
       review1: {
@@ -145,7 +150,8 @@ router.get('/feedback',async  function (req, res){
         business_place_id,
         facebook_id,
         instagram_id,
-        x_id
+        x_id,
+        activePlatforms
         
       }});
   }

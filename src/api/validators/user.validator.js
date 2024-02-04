@@ -6,9 +6,10 @@ export function validateRegister(body) {
     password: Joi.string().min(6).max(20).required(),
     name: Joi.string().min(3).max(24).required(),
     language: Joi.string().valid('tr', 'en').required(),
-    platform: Joi.string().valid('Android', 'IOS').required(),
+    platform: Joi.string().valid('Android', 'IOS','web','Web','ios','android').required(),
     timezone: Joi.number().required(),
-    deviceId: Joi.string().min(4).required()
+    deviceId: Joi.string().min(4).required(),
+    type: Joi.string().valid('user', 'admin', 'creator', 'reader')
   });
   return schema.validate(body);
 }

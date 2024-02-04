@@ -42,13 +42,10 @@ export default (app) => {
   app.use('/',survey);
 
   app.get('/', (_req, res) => {
-    return res.status(200).json({
-      resultMessage: {
-        en: 'Project is successfully working...',
-        tr: 'Proje başarılı bir şekilde çalışıyor...'
-      },
-      resultCode: '00004'
-    }).end();
+    // return res.status(200).json({
+    //   message: 'Welcome to the REMI API'
+    // }).end();
+    return res.render('landing');
   });
 
   app.use((req, res, next) => {
@@ -82,10 +79,7 @@ export default (app) => {
     }
     logger(resultCode, req?.user?._id ?? '', error.message, level, req);
     return res.json({
-      resultMessage: {
-        en: error.message,
-        tr: error.message
-      },
+      message: error.message,
       resultCode: resultCode,
     });
 

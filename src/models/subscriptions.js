@@ -1,11 +1,16 @@
 import mongoose  from "mongoose";
 
 const subscriptionSchema = new mongoose.Schema({
-    subscription_id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
+    metaid: {type: 'string', required: true, unique: true},
+    priceId: { type: String, required: true, unique: true },
+    productId: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     price: Number,
-    duration: String,
-    features: [String]
+    currency: String,
+    interval: String,
+    trialDays: Number,
+    features: [String],
+    
 });
 
 export default mongoose.model('Subscription', subscriptionSchema);

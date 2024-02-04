@@ -1,0 +1,101 @@
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "shilongswarme@gmail.com",
+    "password": "amanshukla123@"
+}
+
+###
+GET http://localhost:3000/api/metric
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY4MTQxMjMsImV4cCI6MTcwNjg1MDEyM30.dCpZhSLZdhUF7R5xgXxFp9tMaiwowLOWNu5vsWDZros
+
+# output
+# {
+#   "totalReviews": 14,
+#   "totalReviewsToday": 2,
+#   "totalReviewsThisWeek": 14,
+#   "totalReviewsThisMonth": 11,
+#   "fiveStarReviews": 7,
+#   "fourStarReviews": 0,
+#   "threeStarReviews": 0,
+#   "twoStarReviews": 0,
+#   "oneStarReviews": 7
+# }
+
+###
+GET http://localhost:3000/api/metric/reviews/week
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY4MTQxMjMsImV4cCI6MTcwNjg1MDEyM30.dCpZhSLZdhUF7R5xgXxFp9tMaiwowLOWNu5vsWDZros
+
+//output
+# [
+#   {
+#     "day": 1,
+#     "count": 0
+#   },
+#   {
+#     "day": 2,
+#     "count": 0
+#   },
+#   {
+#     "day": 3,
+#     "count": 0
+#   },
+#   {
+#     "day": 4,
+#     "count": 11 ...............
+###
+GET http://localhost:3000/api/metric/reviews/month
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY4MTQxMjMsImV4cCI6MTcwNjg1MDEyM30.dCpZhSLZdhUF7R5xgXxFp9tMaiwowLOWNu5vsWDZros
+//output
+# [
+#   {
+#     "day": 1,
+#     "count": 0
+#   },
+#   {
+#     "day": 2,
+#     "count": 0
+#   },
+#   {
+#     "day": 3,
+#     "count": 0
+#   },
+#   {
+#     "day": 4,
+#     "count": 11 ...............
+###
+GET http://localhost:3000/api/metric/reviews/week/average
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY4MTQxMjMsImV4cCI6MTcwNjg1MDEyM30.dCpZhSLZdhUF7R5xgXxFp9tMaiwowLOWNu5vsWDZros
+//output
+
+# [
+#   {
+#     "day": 1,
+#     "averageRating": null
+#   },
+#   {
+#     "day": 2,
+#     "averageRating": null
+#   },
+#   {
+#     "day": 3,
+#     "averageRating": null
+#   },
+#   {
+#     "day": 4,
+#     "averageRating": 2.8181818181818183
+#   },
+#   {
+#     "day": 5,
+#     "averageRating": 3.6666666666666665
+#   },
+#   {
+#     "day": 6,
+#     "averageRating": null
+#   },
+#   {
+#     "day": 7,
+#     "averageRating": null
+#   }
+# ]

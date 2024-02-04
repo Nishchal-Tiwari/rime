@@ -1,0 +1,53 @@
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "shilongswarme@gmail.com",
+    "password": "amanshukla123@"
+}
+###  //plan_PQeaAFl0gR0cj8
+GET http://localhost:3000/api/payment/listPlans
+Content-Type: application/json
+
+###
+GET http://localhost:3000/api/payment/manage-subscription
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDcwNDkxMjIsImV4cCI6MTcwNzA4NTEyMn0.oIaqoWVgA6Fs8FdG_vQxI5HBV_vzRPQA8B4bLHeUHk0
+Content-Type: application/json
+###
+GET  http://localhost:3000/api/payment/listTransactions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDcwNDkxMjIsImV4cCI6MTcwNzA4NTEyMn0.oIaqoWVgA6Fs8FdG_vQxI5HBV_vzRPQA8B4bLHeUHk0
+Content-Type: application/json
+
+###
+GET  http://localhost:3000/api/payment/getSubscriptionStatus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDcwNDkxMjIsImV4cCI6MTcwNzA4NTEyMn0.oIaqoWVgA6Fs8FdG_vQxI5HBV_vzRPQA8B4bLHeUHk0
+Content-Type: application/json
+###
+POST http://localhost:3000/api/payment/createSubscription
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDcwNDY0MjIsImV4cCI6MTcwNzA4MjQyMn0.MnH4AbrWRy0jjZyl0VPOj7eIuaGCBYRnMTefvV8NTvk
+Content-Type: application/json
+
+{
+  "planId":"price_1Ofta1SFypkk6r7EIWtrI0a8"
+}
+
+
+
+
+###
+GET  http://localhost:3000/api/payment/listCards
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY3MzE0MDUsImV4cCI6MTcwNjc2NzQwNX0.273KUCGN_uA-_KxG4aZ24_C4zDy0NVnQe0ReVpwAoy0
+Content-Type: application/json
+###
+GET  http://localhost:3000/api/payment/saveCard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY3MzE0MDUsImV4cCI6MTcwNjc2NzQwNX0.273KUCGN_uA-_KxG4aZ24_C4zDy0NVnQe0ReVpwAoy0
+Content-Type: application/json
+###
+POST  http://localhost:3000/api/payment/deleteCard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFmY2NiZWYxNTJmNGY1MzQxMjgwYzYiLCJpYXQiOjE3MDY3MzE0MDUsImV4cCI6MTcwNjc2NzQwNX0.273KUCGN_uA-_KxG4aZ24_C4zDy0NVnQe0ReVpwAoy0
+Content-Type: application/json
+
+{
+    "cardId":"pm_1OelCPSFypkk6r7ECvU9acGw"
+}
+

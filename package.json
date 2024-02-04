@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-starter-template",
+  "name": "Remi REST API",
   "version": "1.0.0",
-  "description": "You can use this template when you're starting a new project. It contains general concepts, you can customize it according to your needs.",
+  "description": "This REST API, developed by SAAnalytics, is specifically designed for Remi to streamline its operations and provide seamless integration capabilities.",
   "main": "app.js",
   "dependencies": {
     "aws-sdk": "^2.855.0",
@@ -32,21 +32,12 @@
     "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bahricanyesil/nodejs-starter-template.git"
-  },
   "keywords": [
-    "node.js",
-    "boilerplate",
-    "starter",
-    "template"
+    "REMI",
+    "SURVEY",
+    "REVIEWS",
+    "QR"
   ],
-  "author": "Bahrican Yesil",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bahricanyesil/nodejs-starter-template/issues"
-  },
-  "homepage": "https://github.com/bahricanyesil/nodejs-starter-template#readme",
+  "author": "REMI",
   "type": "module"
 }

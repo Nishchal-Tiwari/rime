@@ -21,4 +21,9 @@ router.put('/', auth, imageUpload, editUser);
 router.get('/', auth, getUser);
 router.delete('/', auth, deleteUser);
 
+
+
+
+
+
 export default router

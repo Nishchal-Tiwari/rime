@@ -4,7 +4,8 @@ import randomNumber from '../../../utils/helpers/generate-random-code.js';
 import mongoose from 'mongoose';
 import User from '../../../models/user.js';
 import Stripe from 'stripe'
-const stripe = Stripe('sk_test_51OZaW0SFypkk6r7E01zVSGbYkme0Or7XkT5PkfzEvY4VldQA2msl0HLb6vh0k3KPAKyAuDtmMtH4C6BtS2TbT7hk00gMefi9FO')
+import { StripeApiKey } from "../../../config/index.js";
+const stripe = Stripe(StripeApiKey)
 
 const createbusiness = async (req, res) => {
     const { name, location,customAIDescription=null,description=null,place_id=null,facebook_id=null,instagram_id=null,x_id=null,room=null,slogan=null} = req.body;
@@ -19,13 +20,7 @@ const createbusiness = async (req, res) => {
     try {
         // Generate a QR code for the business
         const business_id = mongoose.Types.ObjectId();
-        const customer = await stripe.customers.create({
-          email: user.email,
-          name:name,
-          metadata:{
-            business_id: business_id
-          }
-        });
+        
         // Create a new business
         const newbusiness = new business({
             business_id:business_id,
@@ -35,12 +30,13 @@ const createbusiness = async (req, res) => {
             customAIDescription,
             user_id,
             place_id,
-            stripeCustomerId:customer.id,
+            stripeCustomerId:null,
             facebook_id,
             instagram_id,
             slogan,
             room,
             x_id,
+            activePlatforms: ['google', 'facebook', 'instagram','glassdoor', 'twitter'],
         });
         const savedbusiness = await newbusiness.save();
        

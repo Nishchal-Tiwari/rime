@@ -1,0 +1,35 @@
+### 
+POST  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDYzNjlmYjNlZTYwZWY3N2IzOGQiLCJpYXQiOjE3MDcwNzEwODUsImV4cCI6MTcwNzY3NTg4NX0.VnB_fzfVccYjgAn-xB6l5wViPpBX4i1YTl_DjvlDABU
+Content-Type: application/json
+
+{
+
+    "name":"SA GROUP OF HOTELS",
+    "location":"Thane",
+    "customAIDescription":"Generate nice and unique reviews for our hotel that comprise of royalty and business matters",
+    "description":"Largest hotel in Asia with the best services and amenities",
+    "place_id":"ChIJe8DDvhWXyzsRfZJAyUvulBA",
+    "room":200,
+    "slogan":"Best place to stay"
+    
+}
+
+### get hotel description
+GET  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98
+
+
+###  Edit current description 
+PUT  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98
+Content-Type: application/json
+
+{
+
+    "name":"SA GROUP OF HOTELS"
+}
+
+### DELETE A BUSINESS
+DELETE  http://localhost:3000/api/business
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98

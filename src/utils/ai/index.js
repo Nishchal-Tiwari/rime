@@ -1,12 +1,12 @@
 import { OpenAI_SECRET_KEY } from '../../config/index.js'; // Ensure this path is correct
 import OpenAI from 'openai';
 
-var KEY = OpenAI_SECRET_KEY?OpenAI_SECRET_KEY:'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'; // Ensure this key is correct
+var KEY = OpenAI_SECRET_KEY; // Ensure this key is correct
 const openai = new OpenAI({
   apiKey: KEY, // This is the default and can be omitted
 });
 
-async function generateReview(businessDescription,customReviewDetails,businessName) {
+async function generateReview(businessDescription,customReviewDetails,businessName,activeAI) {
   const prompt = `
 Business Name: '${businessName}'
 Business Description: '${businessDescription}'
@@ -28,6 +28,7 @@ Example:
     },
     // Add 3 more reviews for 1 star
   },
+  "2star": {
   // Repeat the same structure for 2, 3, 4, and 5 stars
 }
 `;
@@ -37,6 +38,7 @@ Example:
   });
   const res = chatCompletion.choices[0].message.content;
   console.log(JSON.parse(res));
+  return JSON.parse(res);
 }
 
 export default generateReview;

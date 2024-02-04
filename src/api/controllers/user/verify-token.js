@@ -36,7 +36,10 @@ export default async (req, res) => {
     });
 
     if (!tokenExists) return res.status(401).json(errorHelper("00011", req));
-    res.status(200).json({ message: "loggedin" });
+   const user= await User.findById(req.user._id);
+   user.password=null;
+ 
+    res.status(200).json(user);
   } catch (err) {
     return res.status(401).json({ error: err.message });
   }

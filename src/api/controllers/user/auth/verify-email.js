@@ -55,7 +55,7 @@ try{
   //   resultMessage: { en: getText('en', '00058'), tr: getText('tr', '00058') },
   //   resultCode: '00058', accessToken, refreshToken
   // });
-  return res.status(200).json({message:'success', })
+  res.render('emailVerified');
  // return res.redirect('http://localhost:3000/');
 }catch(err){
   res.status(500).json({ error: err.message });
