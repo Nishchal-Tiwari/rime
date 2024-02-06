@@ -4,7 +4,7 @@ import loader from './loaders/index.js';
 import path from 'path'
 import helmet from 'helmet';
 const app = express();
-
+import { FrontendUrl } from './config/index.js';
 // app.use(
 //   helmet.contentSecurityPolicy({
 //     directives: {
@@ -20,17 +20,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 loader(app);
-
-app.get('/x',(req,res)=>{
-  res.render('card')
-})
-app.get('/x2',(req,res)=>{
-  res.render('new1')
-})
-app.get('/x3',(req,res)=>{
-  res.render('notFound2')
-})
-app.get('/x1',(req,res)=>{res.render('index1')});
 app.get("/success", (req, res) => {
   res.send(`
     <html>
@@ -39,7 +28,7 @@ app.get("/success", (req, res) => {
         <script>
           alert("Payment Successful! Redirecting to manage subscriptions...");
           setTimeout(function() {
-            window.location.href = "/manage-subscription";
+            window.location.href = "${FrontendUrl}";
           }, 3000); // Redirect after 3 seconds
         </script>
       </head>
@@ -59,7 +48,7 @@ app.get("/cancel", (req, res) => {
         <script>
           alert("Payment was canceled. You will be redirected to the homepage.");
           setTimeout(function() {
-            window.location.href = "/";
+            window.location.href = "${FrontendUrl}";
           }, 3000); // Redirect after 3 seconds
         </script>
       </head>

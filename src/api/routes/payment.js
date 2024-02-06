@@ -8,7 +8,8 @@ import Stripe from 'stripe';
 import { StripeApiKey } from '../../config/index.js';
 import subscriptions from '../../models/subscriptions.js';
 const stripe = Stripe(StripeApiKey)
-
+import { FrontendUrl } from '../../config/index.js';
+import { BackendUrl } from '../../config/index.js';
 Router.get('/listPlans', async (req, res) => {
   try{
     const plans = await subscriptions.find({});
@@ -31,8 +32,8 @@ Router.get('/saveCard', auth, async (req, res) => {
             customer: user.stripeCustomerId,
             payment_method_types: ['card'],
             mode: 'setup',
-            success_url: 'http://localhost:3000/success', // URL to which customer is redirected after successful payment
-            cancel_url: 'http://localhost:3000/cancel', // URL to which customer is redirected if they cancel the payment
+            success_url: `${BackendUrl}/success`, // URL to which customer is redirected after successful payment
+            cancel_url: `${BackendUrl}/cancel`, // URL to which customer is redirected if they cancel the payment
         });
         res.status(200).json({ sessionId: session.url });
     }
@@ -133,8 +134,8 @@ Router.post('/createSubscription',auth, async (req, res) => {
               quantity: 1
           }],
           mode: 'subscription',
-          success_url: 'http://localhost:3000/success', // URL to which customer is redirected after successful payment
-          cancel_url: 'http://localhost:3000/cancel', // URL to which customer is redirected if they cancel the payment
+          success_url: `${BackendUrl}/success`, // URL to which customer is redirected after successful payment
+          cancel_url: `${BackendUrl}/cancel`, // URL to which customer is redirected if they cancel the payment
       });
       res.status(200).json({ sessionId: session.id });
   } catch (error) {
@@ -192,7 +193,7 @@ Router.get('/manage-subscription',auth, async (req, res) => {
     const stripeCustomerId = await getStripeCustomerIdByUserId(userId); // Implement this function
       const session = await stripe.billingPortal.sessions.create({
         customer: stripeCustomerId,
-        return_url: 'http://localhost:3000', // Where users are redirected after leaving the portal
+        return_url: FrontendUrl, // Where users are redirected after leaving the portal
       });
   
       res.json({ url: session.url });
