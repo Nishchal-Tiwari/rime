@@ -1,6 +1,6 @@
 import updatebusiness  from "./updateBusiness.js";
 import deletebusiness from "./deleteBusiness.js";
-import {createbusiness,getAllBusinessesForUser,getBusinessInfoForReview} from "./createBusiness.js";
+import {createbusiness,getAllBusinessesForUser,getBusinessInfoForReview,hotelfbview} from "./createBusiness.js";
 import {getCurrentBusiness} from './getBusiness.js'
 // export default 
 export  {
@@ -9,5 +9,5 @@ export  {
     createbusiness,
     getAllBusinessesForUser,
     getBusinessInfoForReview,
-    getCurrentBusiness
-}
+    getCurrentBusiness,
+    hotelfbview}

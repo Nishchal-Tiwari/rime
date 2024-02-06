@@ -37,6 +37,7 @@ Example:
     model: 'gpt-3.5-turbo',
   });
   const res = chatCompletion.choices[0].message.content;
+  
   console.log(JSON.parse(res));
   return JSON.parse(res);
 }

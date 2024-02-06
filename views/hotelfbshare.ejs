@@ -1,0 +1,23 @@
+<html>
+<head>
+<title><%= data.name %></title>
+<!-- You can use Open Graph tags to customize link previews.
+Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+
+<% if(data){ %>
+<meta property="og:url"           content="<%= data.location %> " />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content=<%= data.name %> />
+<meta property="og:description"   content=<% data.description %> />
+
+<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+<% } %>
+</head>
+<body>
+  <% if(data){ %>
+     <%= data.location %>
+    <%= data.name %>
+    <%= data.description %> 
+    <% } %>
+</body>
+</html>

@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 export default async function main(to,confirmationLink,name) {
   // send mail with defined transport object
   let message = {
-    from: ` Survey Sphere <survey.sphere.info@gmail.com>`, // sender address
+    from: ` RIME < info@rime.ac.in>`, // sender address
     to: ` ${name}  <${to}>`, // list of receivers
     subject: "Verify Your Account", // Subject line
     text: "Hello world?", // plain text body

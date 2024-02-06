@@ -1,8 +1,13 @@
 import express from 'express';
 import business from '../models/business.js';
+import User from '../models/user.js';
 import generateAIReviews from  '../utils/ai/index.js';
+import PrecompiledReview from '../models/precompiledReviews.js';
 const router = express.Router();
 import mongoose from 'mongoose';
+import Stripe from 'stripe';
+import { StripeApiKey } from '../config/index.js';
+const stripe = Stripe(StripeApiKey);
 router.get('/feedback',async  function (req, res){
   const business_id = req.query.business_id;
   console.log(business_id);
@@ -10,7 +15,9 @@ router.get('/feedback',async  function (req, res){
     return res.render('nohotelfound');
   }
   try {
-    const bn = await business.findOne({business_id: business_id});
+    const bn = await business.findOne({business_id: business_id}).populate('precompiledReviews');
+   
+    
     if(!bn){
       return res.render('nohotelfound');
     }
@@ -25,8 +32,9 @@ router.get('/feedback',async  function (req, res){
     const activePlatforms=bn.activePlatforms
     const activeAI=bn.activeAI
 
-  //  const generatedd = await generateAIReviews(business_description,business_customAIDescription,business_name,activeAI);
-  const generated={
+  //  const generated = await generateAIReviews(business_description,business_customAIDescription,business_name,activeAI);
+  
+  const generatedd={
     '1star': {
       review1: {
         summary: 'Not worth the money',
@@ -138,7 +146,20 @@ router.get('/feedback',async  function (req, res){
       }
     }
   }
-
+  let generated=null;
+  const subs=await findIfBusinessHasActiveSubscriptions(bn.user_id);
+  console.log(subs?"activesubs":"nosubscription");
+  if(subs){
+    generatePrecompiledReviews(business_id);
+  }
+  if(bn.precompiledReviews.length>0&&subs){
+    generated=JSON.parse(bn.precompiledReviews[0].review);
+    // delete this review from precompiledreviews
+    await PrecompiledReview.findByIdAndDelete(bn.precompiledReviews[0]._id);
+  }
+  else{
+    generated=generatedd;
+  }
     
       res.render('index',{data:{
         generated,
@@ -160,7 +181,51 @@ router.get('/feedback',async  function (req, res){
   }
 })
 
+async function findIfBusinessHasActiveSubscriptions(uid){
+  const user = await User.findById(uid);
+  if (!user || !user.stripeCustomerId) {
+    return false;
+  }
+    const subscriptions = await stripe.subscriptions.list({
+      customer: user.stripeCustomerId,
+      status: 'active',
+      limit: 1
+  });
+  if (subscriptions.data.length > 0) {
+  return true;
+  }
+  return false;
+}
 
-
+async function generatePrecompiledReviews(bid) {
+  try {
+    const b = await business.find({ business_id: bid });
+    if (!b) {
+      return null;
+    }
+    for (var i = 0; i < 1; i++) {
+      console.log("starting", i);
+      const reviews = await generateAIReviews(
+        b.description,
+        b.customAIDescription,
+        b.name,
+        b.activeAI
+      );
+      const precompiledReviews = new PrecompiledReview({
+        business_id: bid,
+        review: JSON.stringify(reviews),
+      });
+      const saved = await precompiledReviews.save();
+      await business.findOneAndUpdate({business_id: bid},{
+        $push: { precompiledReviews: saved._id }
+      });
+     
+      console.log("done ",i);
+    }
+  //  await b.save();
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export default router;
