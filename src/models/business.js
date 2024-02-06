@@ -37,6 +37,7 @@ const businessSchema = new mongoose.Schema({
   ],
   activeAI: { type: String, default: "chatgpt3.5" },
   isActive: { type: Boolean, default: true },
+  precompiledReviews:[{type:mongoose.Types.ObjectId, ref: "PrecompiledReview"}]
 });
 
 export default mongoose.model("Business", businessSchema);

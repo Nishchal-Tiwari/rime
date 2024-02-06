@@ -1,7 +1,7 @@
 import { User, Business } from "../../../models/index.js";
 const updatebusiness = async (req, res) => {
   try {
-    console.log(req.body)
+   
     const user_id = req.user._id;
     const user = await User.findById(user_id);
     if (!user) {

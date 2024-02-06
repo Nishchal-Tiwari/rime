@@ -160,11 +160,14 @@ Router.get('/getSubscriptionStatus', auth, async (req, res) => {
         if (subscriptions.data.length > 0) {
             const subscription = subscriptions.data[0]; // Get the first subscription
             const items = subscription.items.data;
-
+            const product = await stripe.products.retrieve(items[0].price.product); 
             if (items.length > 0) {
-                const planDetails = items.map(item => ({
+                const planDetails = items.map(item => {
+                    
+                    return {
+                    name:product.name,
                     priceId: item.price.id // Assuming you're looking for the price ID
-                }));
+                }});
 
                 // Respond with the planName and priceId only
                 res.status(200).json(planDetails);

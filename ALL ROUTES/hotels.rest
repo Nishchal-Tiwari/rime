@@ -1,6 +1,6 @@
 ### 
 POST  http://localhost:3000/api/business
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDYzNjlmYjNlZTYwZWY3N2IzOGQiLCJpYXQiOjE3MDcwNzEwODUsImV4cCI6MTcwNzY3NTg4NX0.VnB_fzfVccYjgAn-xB6l5wViPpBX4i1YTl_DjvlDABU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDcyMjc2MDYsImV4cCI6MTcwNzI2MzYwNn0.W0MsH0I-E4KZwU_4517HEi0pigeisXXx2UKB0O3_7ek
 Content-Type: application/json
 
 {
@@ -17,12 +17,14 @@ Content-Type: application/json
 
 ### get hotel description
 GET  http://localhost:3000/api/business
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDcyMjc2MDYsImV4cCI6MTcwNzI2MzYwNn0.W0MsH0I-E4KZwU_4517HEi0pigeisXXx2UKB0O3_7ek
+
+
 
 
 ###  Edit current description 
 PUT  http://localhost:3000/api/business
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDcyMjc2MDYsImV4cCI6MTcwNzI2MzYwNn0.W0MsH0I-E4KZwU_4517HEi0pigeisXXx2UKB0O3_7ek
 Content-Type: application/json
 
 {
@@ -32,4 +34,4 @@ Content-Type: application/json
 
 ### DELETE A BUSINESS
 DELETE  http://localhost:3000/api/business
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmYzllMzg3MGIxOTZkMDQwY2ViNmUiLCJpYXQiOjE3MDcwNjgzODcsImV4cCI6MTcwNzEwNDM4N30.Ek2l-qWANfBpN1vd-2YvFXNXMhcG6SiUX6rNZLC-J98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZjZlZTZiNWI1NGI0ZjJhMjFjZWQiLCJpYXQiOjE3MDcyMjY1MTcsImV4cCI6MTcwNzI2MjUxN30.nm_Bax7PNWDg_17h31SzAXfz26wOKLax-MuMLnGLLyc

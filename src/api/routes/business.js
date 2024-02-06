@@ -4,13 +4,14 @@ import {updatebusiness,
   createbusiness,
   getAllBusinessesForUser,
   getBusinessInfoForReview,
-  getCurrentBusiness
+  getCurrentBusiness,
+  hotelfbview
 } from '../controllers/business/index.js';
   import { auth, imageUpload } from '../middlewares/index.js';
 import fs from 'fs';
   
 const router = Router();
-
+router.get('/myhotel/:bid', hotelfbview);
 router.get('/',auth,getCurrentBusiness);
 router.post("/qrbusiness_info",getBusinessInfoForReview)
 // create hotel

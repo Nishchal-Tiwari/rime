@@ -4,6 +4,7 @@ import { auth, imageUpload } from '../middlewares/index.js';
 import Business from '../../models/business.js';
 import User from '../../models/user.js';
 import review from '../../models/reviews.js';
+import { BackendUrl } from '../../config/index.js';
 const router = Router();
 
 router.post('/', async (req,res)=>{
@@ -39,7 +40,8 @@ router.post('/', async (req,res)=>{
       redirectUrl=`https://search.google.com/local/writereview?placeid=ChIJP0warDDowokRfvXMkBqL5Cg`
     }
     else if(platform==='facebook'){
-      redirectUrl=`https://www.facebook.com/${business.facebook_page_id}/reviews/`
+      // redirectUrl=`https://www.facebook.com/${business.facebook_page_id}/reviews/`
+      redirectUrl=`https://www.facebook.com/sharer/sharer.php?u=${BackendUrl}/api/business/myhotel/${business.business_id}`
     }
     else if(platform==='twitter'){
       redirectUrl=`https://twitter.com/intent/tweet?text=${textReview}&url=https://example.com&hashtags=#${business.name}`
