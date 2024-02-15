@@ -37,7 +37,7 @@ router.post('/', async (req,res)=>{
     await business.save();
     let  redirectUrl = '/x2';
     if(platform==='google'){
-      redirectUrl=`https://search.google.com/local/writereview?placeid=${business.place_id?business.place_id:"ChIJP0warDDowokRfvXMkBqL5Cg"}}`
+      redirectUrl=`https://search.google.com/local/writereview?placeid=${business.place_id?business.place_id:"ChIJP0warDDowokRfvXMkBqL5Cg"}`
     }
     else if(platform==='facebook'){
       // redirectUrl=`https://www.facebook.com/${business.facebook_page_id}/reviews/`
