@@ -37,10 +37,15 @@ router.post('/', async (req,res)=>{
     await business.save();
     let  redirectUrl = '/x2';
     if(platform==='google'){
-      redirectUrl=`https://search.google.com/local/writereview?placeid=ChIJP0warDDowokRfvXMkBqL5Cg`
+      redirectUrl=`https://search.google.com/local/writereview?placeid=${business.place_id?business.place_id:"ChIJP0warDDowokRfvXMkBqL5Cg"}}`
     }
     else if(platform==='facebook'){
       // redirectUrl=`https://www.facebook.com/${business.facebook_page_id}/reviews/`
+      if(business.facebook_id)
+      {
+        res.redirect(facebook_id);
+      }
+      else
       redirectUrl=`https://www.facebook.com/sharer/sharer.php?u=${BackendUrl}/api/business/myhotel/${business.business_id}`
     }
     else if(platform==='twitter'){
@@ -48,9 +53,16 @@ router.post('/', async (req,res)=>{
     }
     else if(platform==='instagram'){
       //link to prefilled post with review
+      if(business.instagram_id)
+      {
+        res.redirect(business.instagram_id);
+      }
+      else
       redirectUrl = `https://www.instagram.com/${business.instagram_handle}/?hl=en`
     }
     else if(platform==='glassdoor'){
+      if(business.glassdoor_id)
+        res.redirect(business.glassdoor_id);
       redirectUrl = `https://www.glassdoor.com/Reviews/${business.glassdoor_handle}`
     }
     // Respond with the newly created review
