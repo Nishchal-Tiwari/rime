@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "email": "saanalytics.work@gmail.com",
-  "password": "Saanalytics",
+  "password": "123123",
   "name": "SA Analytics AC1",
   "language": "en",
   "platform": "Android",
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "email": "saanalytics.work@gmail.com",
-    "password": "Saanalytics"
+    "password": "123123"
 }
 
 ###  Edit User ###

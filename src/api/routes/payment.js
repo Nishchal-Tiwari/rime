@@ -195,7 +195,6 @@ Router.get('/manage-subscription',auth, async (req, res) => {
         customer: stripeCustomerId,
         return_url: FrontendUrl, // Where users are redirected after leaving the portal
       });
-  
       res.json({ url: session.url });
     } catch (error) {
       console.error('Error creating customer portal session:', error);

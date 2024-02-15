@@ -34,4 +34,4 @@ Content-Type: application/json
 
 ### DELETE A BUSINESS
 DELETE  http://localhost:3000/api/business
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZjZlZTZiNWI1NGI0ZjJhMjFjZWQiLCJpYXQiOjE3MDcyMjY1MTcsImV4cCI6MTcwNzI2MjUxN30.nm_Bax7PNWDg_17h31SzAXfz26wOKLax-MuMLnGLLyc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDcyMjc2MDYsImV4cCI6MTcwNzI2MzYwNn0.W0MsH0I-E4KZwU_4517HEi0pigeisXXx2UKB0O3_7ek
