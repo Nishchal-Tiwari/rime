@@ -16,12 +16,21 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "saanalytics.admin@gmail.com",
-    "password": "12345678"
+    "email": "saanalytics.work@gmail.com",
+    "password": "123123"
 }
 ### Get All Users ###
 GET http://localhost:3000/api/admin/allusers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJmZDM3Nzg0ZTBkNjc5YmI2ODIyMzciLCJpYXQiOjE3MDcwNzA0MjEsImV4cCI6MTcwNzEwNjQyMX0.73Mq3OrxwKm09hZO_BKE-1mfNq0b11VwUvu4K-AgBYQ
+
+###
+GET http://localhost:3000/api/admin/weeklyusers
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDgxODExNjksImV4cCI6MTcwODIxNzE2OX0.A1eQJ8txlccbpixzvSUPkXVoXZYVjHlmWGgcovv4dbs
+
+###
+
+GET http://localhost:3000/api/admin/monthlyusers
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWMyMzk4YjFkNGU3ODkwZTE0MTY0NTAiLCJpYXQiOjE3MDgxODExNjksImV4cCI6MTcwODIxNzE2OX0.A1eQJ8txlccbpixzvSUPkXVoXZYVjHlmWGgcovv4dbs
 
 ### Get A Single User With UID ###
 POST http://localhost:3000/api/admin/getuser

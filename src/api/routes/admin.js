@@ -18,6 +18,107 @@ router.get('/allusers', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+router.get('/weeklyusers', async (req, res) => {
+  try {
+    // Calculate the start and end of the current week
+    const now = new Date();
+    const first = now.getDate() - now.getDay(); // First day is the day of the month - the day of the week
+    const last = first + 6; // last day is the first day + 6
+
+    const startDate = new Date(now.setDate(first));
+    startDate.setHours(0, 0, 0, 0); // Start of the first day of the week
+
+    const endDate = new Date(now.setDate(last));
+    endDate.setHours(23, 59, 59, 999); // End of the last day of the week
+
+    const dailyRegistrations = await User.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startDate, $lte: endDate }
+        }
+      },
+      {
+        $project: {
+          dayOfWeek: { $dayOfWeek: "$createdAt" }
+        }
+      },
+      {
+        $group: {
+          _id: "$dayOfWeek",
+          totalUsers: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { "_id": 1 }
+      }
+    ]);
+
+    // Initialize counts for each day of the week
+    let dailyCounts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0};
+
+    // Map the aggregation results to the initialized days
+    dailyRegistrations.forEach(({ _id, totalUsers }) => {
+      dailyCounts[_id] = totalUsers;
+    });
+
+    // Optionally, convert to day names
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let results = {};
+    for (let i = 1; i <= 7; i++) {
+      results[dayNames[i - 1]] = dailyCounts[i];
+    }
+
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get('/monthlyusers', async (req, res) => {
+  try {
+    const monthlyRegistrations = await User.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" }
+          },
+          totalUsers: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1 }
+      },
+      {
+        $project: {
+          _id: 0, // Exclude the _id field
+          month: "$_id.month",
+          totalUsers: 1
+        }
+      }
+    ]);
+
+    // Initialize an object for all months with a default value of 0
+    let monthlyCounts = {};
+    for (let i = 1; i <= 12; i++) {
+      monthlyCounts[i] = 0;
+    }
+
+    // Update the counts for months that are present in the database
+    monthlyRegistrations.forEach((registration) => {
+      monthlyCounts[registration.month] = registration.totalUsers;
+    });
+
+    res.status(200).json(monthlyCounts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+
+
 // Get user by ID
 router.post('/getuser', async (req, res) => {
   const uid = req.body.uid;
