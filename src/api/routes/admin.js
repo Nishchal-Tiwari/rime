@@ -10,7 +10,7 @@ const stripe = Stripe('sk_test_51OZaW0SFypkk6r7E01zVSGbYkme0Or7XkT5PkfzEvY4VldQA
 
 // ---------------------- METRICS ---------------------- //
 // Get all users
-router.get('/allusers', async (req, res) => {
+router.get('/allusers', admin_auth,async (req, res) => {
   try {
     const users = await User.find({}).populate('business_id');
     res.status(200).json(users);
@@ -74,7 +74,7 @@ router.get('/weeklyusers', async (req, res) => {
   }
 });
 
-router.get('/monthlyusers', async (req, res) => {
+router.get('/monthlyusers', admin_auth,async (req, res) => {
   try {
     const monthlyRegistrations = await User.aggregate([
       {
@@ -120,7 +120,7 @@ router.get('/monthlyusers', async (req, res) => {
 
 
 // Get user by ID
-router.post('/getuser', async (req, res) => {
+router.post('/getuser',admin_auth, async (req, res) => {
   const uid = req.body.uid;
   try {
     const user = await User.findById(uid);
@@ -139,7 +139,7 @@ router.post('/getuser', async (req, res) => {
 });
 
 // Disable a user
-router.post('/disableuser', async (req, res) => {
+router.post('/disableuser', admin_auth,async (req, res) => {
   const uid = req.body.uid;
   try {
     await User.findByIdAndUpdate(uid, { isActivated: false });
@@ -150,7 +150,7 @@ router.post('/disableuser', async (req, res) => {
 });
 
 // Enable a user
-router.post('/enableuser', async (req, res) => {
+router.post('/enableuser',admin_auth, async (req, res) => {
   const uid = req.body.uid;
   try {
     await User.findByIdAndUpdate(uid, { isActivated: true });
@@ -160,7 +160,7 @@ router.post('/enableuser', async (req, res) => {
   }
 });
 // Get user's reviews
-router.post('/getuserreviews', async (req, res) => {
+router.post('/getuserreviews', admin_auth,async (req, res) => {
   const uid = req.body.uid;
   try {
     const user = await User.findById(uid);
@@ -173,7 +173,7 @@ router.post('/getuserreviews', async (req, res) => {
 });
 
 // Get user's business information
-router.post('/getuserbusinesseinfo', async (req, res) => {
+router.post('/getuserbusinesseinfo', admin_auth,async (req, res) => {
   const uid = req.body.uid;
   try {
     const user = await User.findById(uid);
@@ -185,7 +185,7 @@ router.post('/getuserbusinesseinfo', async (req, res) => {
 });
 
 // Disable user's subscription
-router.post('/disableusersubscription', async (req, res) => {
+router.post('/disableusersubscription', admin_auth,async (req, res) => {
   const uid = req.body.uid;
   try {
     const user = await User.findById(uid);
@@ -238,7 +238,7 @@ router.post('/enableusersubscription',admin_auth, async (req, res) => {
 });
 
 // Upgrade user's subscription
-router.post('/upgradeusersubscription', async (req, res) => {
+router.post('/upgradeusersubscription', admin_auth,async (req, res) => {
   const uid = req.body.uid;
   const newPlanId = req.body.newPlanId;
   try {
@@ -269,7 +269,7 @@ router.post('/upgradeusersubscription', async (req, res) => {
 
 
 //get all business
-router.get('/getallbusiness', async (req, res) => {
+router.get('/getallbusiness', admin_auth,async (req, res) => {
   try {
     const business = await Business.find({}).populate('user_id');
     res.status(200).json(business);
@@ -282,7 +282,7 @@ router.get('/getallbusiness', async (req, res) => {
 
 // ---------------------- ADMIN PAYMENT ---------------------- //
 // get subscription plans
-router.get('/getplans',admin_auth,async (req, res) => {
+router.get('/getplans',async (req, res) => {
   try {
     const plans = await Subscription.find({});
     res.status(200).json(plans);
@@ -291,7 +291,7 @@ router.get('/getplans',admin_auth,async (req, res) => {
   }
 });
 
-router.post('/update-plan', admin_auth, async (req, res) => {
+router.post('/update-plan',admin_auth, admin_auth, async (req, res) => {
   const { planId: priceId } = req.body;
   try {
     if (!priceId) {
