@@ -99,7 +99,7 @@ function gmailHTML(link){
     <h2>Welcome to RIME</h2>
     <p>Thank you for signing up with RIME. Please confirm your email address by clicking on the link below:</p>
     <a href="${link}" class="button">Verify Email</a>
-    <p>If you did not create an account with Survey Sphere, please ignore this email.</p>
+    <p>If you did not create an account with RIME, please ignore this email.</p>
   </div>
 </body>
 </html>
