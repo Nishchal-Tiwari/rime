@@ -13,7 +13,7 @@ Business Description: '${businessDescription}'
 Custom Review Details: [${customReviewDetails}]
 
 Please generate 5 reviews for each star rating (1 to 5 stars) for the above-mentioned business. Each review should be accompanied by a summary. Format the output as a JSON object with reviews categorized under each star rating.
-1Star review should also be decent should contain harsh language only good things
+1Star review should also be decent and should only give positive review (strict : only positive reviews)
 Example:
 
 {

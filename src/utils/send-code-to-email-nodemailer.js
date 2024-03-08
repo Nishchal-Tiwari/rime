@@ -16,10 +16,10 @@ const transporter = nodemailer.createTransport({
 export default async function main(to,confirmationLink,name) {
   // send mail with defined transport object
   let message = {
-    from: ` RIME < info@rime.ac.in>`, // sender address
+    from: ` RIME < no-reply@rime.ac.in>`, // sender address
     to: ` ${name}  <${to}>`, // list of receivers
     subject: "Verify Your Account", // Subject line
-    text: "Hello world?", // plain text body
+    text: "Verification Link From Rime", // plain text body
     html: `${gmailHTML(confirmationLink)}`, // html body
     // attachments: [
     //   {   // utf-8 string as an attachment  for more refer nodemailer documentation  LINK : https://nodemailer.com/message/attachments/
@@ -96,8 +96,8 @@ function gmailHTML(link){
 </head>
 <body>
   <div class="container animated">
-    <h2>Welcome to Survey Sphere</h2>
-    <p>Thank you for signing up with Survey Sphere. Please confirm your email address by clicking on the link below:</p>
+    <h2>Welcome to RIME</h2>
+    <p>Thank you for signing up with RIME. Please confirm your email address by clicking on the link below:</p>
     <a href="${link}" class="button">Verify Email</a>
     <p>If you did not create an account with Survey Sphere, please ignore this email.</p>
   </div>
