@@ -3,8 +3,10 @@ import { admin_auth } from '../middlewares/index.js';
 import {User,Business,Subscription,Review} from '../../models/index.js'
 const router = Router();
 import mongoose from 'mongoose';
+import { StripeApiKey } from '../../config/index.js';
 import Stripe from 'stripe';
-const stripe = Stripe('sk_test_51OZaW0SFypkk6r7E01zVSGbYkme0Or7XkT5PkfzEvY4VldQA2msl0HLb6vh0k3KPAKyAuDtmMtH4C6BtS2TbT7hk00gMefi9FO')
+import businessCalls from '../../models/businessCalls.js';
+const stripe = Stripe(StripeApiKey);
 
 
 
@@ -345,6 +347,16 @@ router.post('/update-plan',admin_auth, admin_auth, async (req, res) => {
 });
 
 // ---------------------- ADMIN PAYMENT ---------------------- //
+
+router.get('/getBusinessCalls',async (req,res)=>{
+  try {
+    const _businessCalls = await businessCalls.find({});
+    res.status(200).json(_businessCalls);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
+
 
 export default router
 

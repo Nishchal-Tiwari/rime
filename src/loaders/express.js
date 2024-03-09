@@ -10,6 +10,7 @@ import { rateLimiter } from '../api/middlewares/index.js';
 import { jwtSecretKey } from '../config/index.js';
 import bodyParser from 'body-parser';
 import survey from '../survey/index.js'
+import BusinessCall from '../models/businessCalls.js'
 export default (app) => {
   process.on('uncaughtException', async (error) => {
     // console.log(error);
@@ -47,7 +48,30 @@ export default (app) => {
     // }).end();
     return res.render('landing');
   });
-
+  app.post('/api/business-calls', async (req, res) => {
+    try {
+      // Extract properties from the request body
+      const { name, businessEntityName, address, emailId, mobileNumber } = req.body;
+  
+      // Create a new document using the extracted properties
+      const newBusinessCall = new BusinessCall({
+        name,
+        businessEntityName,
+        address,
+        emailId,
+        mobileNumber
+      });
+  
+      // Save the document to the database
+      const savedBusinessCall = await newBusinessCall.save();
+  
+      res.status(201).json(savedBusinessCall);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers',
