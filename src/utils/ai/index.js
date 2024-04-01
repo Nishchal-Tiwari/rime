@@ -7,13 +7,18 @@ const openai = new OpenAI({
 });
 
 async function generateReview(businessDescription,customReviewDetails,businessName,activeAI) {
+  console.log("------",businessName,businessDescription,customReviewDetails)
   const prompt = `
-Business Name: '${businessName}'
-Business Description: '${businessDescription}'
-Custom Review Details: [${customReviewDetails}]
+  analze ${businessName} description and custom review details. assume you are a customer of this business now write what i say below as a customer .
+  
+    "Business Name": '${businessName}',
+    "Business Description": '${businessDescription}',
+    "Custom Review Details": [${customReviewDetails}] 
+  
 
-Please generate 5 reviews for each star rating (1 to 5 stars) for the above-mentioned business. Each review should be accompanied by a summary. Format the output as a JSON object with reviews categorized under each star rating.
-1Star review should also be decent and should only give positive review (strict : only positive reviews)
+
+Please generate 5 reviews for each star rating (1 to 5 stars) for the above-mentioned business also include business type and its name in every review. Each review should be accompanied by a summary. Format the output as a JSON object with reviews categorized under each star rating.
+1 Star review should also be decent and should only give positive review with scope of improvenent  (strict : only positive reviews if review is 1 or 2 then add that there is some scope of improvement or something else)
 Example:
 
 {

@@ -501,7 +501,9 @@
         });
       });
       }
-
+      // document.getElementById("review").onchange(e=>{
+      //   navigator.clipboard.writeText(e.target.value);
+      // })
       // Event listener for star rating changes
       document.querySelectorAll('.star-rating input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', function() {
@@ -517,6 +519,8 @@
       {
           const currentToken=++token;
           var reviewEle=document.getElementById("review")
+
+
           reviewEle.value='';
           var typeWriterRunning=false;
           var text=text;

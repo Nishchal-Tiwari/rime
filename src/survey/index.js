@@ -150,7 +150,7 @@ router.get('/feedback',async  function (req, res){
   const subs=await findIfBusinessHasActiveSubscriptions(bn.user_id);
   console.log(subs?"activesubs":"nosubscription");
   if(subs){
-    generatePrecompiledReviews(business_id);
+    generatePrecompiledReviews(bn.id);
   }
   if(bn.precompiledReviews.length>0&&subs){
     generated=JSON.parse(bn.precompiledReviews[0].review);
@@ -197,9 +197,10 @@ async function findIfBusinessHasActiveSubscriptions(uid){
   return false;
 }
 
-async function generatePrecompiledReviews(bid) {
+async function generatePrecompiledReviews(id) {
   try {
-    const b = await business.find({ business_id: bid });
+    const b = await business.findById(id);
+    console.log(b.name,'+++++++++++++++++++++++++++++++',id)
     if (!b) {
       return null;
     }
@@ -212,11 +213,11 @@ async function generatePrecompiledReviews(bid) {
         b.activeAI
       );
       const precompiledReviews = new PrecompiledReview({
-        business_id: bid,
+        business_id: b.business_id,
         review: JSON.stringify(reviews),
       });
       const saved = await precompiledReviews.save();
-      await business.findOneAndUpdate({business_id: bid},{
+      await business.findOneAndUpdate({business_id: b.business_id},{
         $push: { precompiledReviews: saved._id }
       });
      

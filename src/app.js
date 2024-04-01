@@ -20,6 +20,10 @@ import { FrontendUrl } from './config/index.js';
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 loader(app);
+
+
+
+
 app.get("/success", (req, res) => {
   res.send(`
     <html>
