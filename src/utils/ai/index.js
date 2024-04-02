@@ -18,7 +18,7 @@ async function generateReview(businessDescription,customReviewDetails,businessNa
 
 
 Please generate 5 reviews for each star rating (1 to 5 stars) for the above-mentioned business also include business type and its name in every review. Each review should be accompanied by a summary. Format the output as a JSON object with reviews categorized under each star rating.
-1 Star review should also be decent and should only give positive review with scope of improvenent  (strict : only positive reviews if review is 1 or 2 then add that there is some scope of improvement or something else)
+1 Star review should also be decent and should only give positive review with scope of improvenent  (strict : no terrible review just decent review if review is 1 or 2 then add that there is some scope of improvement or something and summary whould be weak not great  )
 Example:
 
 {
