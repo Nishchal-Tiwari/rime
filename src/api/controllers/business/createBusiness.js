@@ -135,11 +135,13 @@ const hotelfbview = async (req, res) => {
 
 async function generatePrecompiledReviews(bid) {
   try {
-    const b = await business.find({ business_id: bid });
-    if (!b) {
-      return null;
-    }
-    for (var i = 0; i < 3; i++) {
+    
+    // 25 free reviews
+    for (var i = 0; i < 25; i++) {
+      const b = await business.find({ business_id: bid });
+      if (!b) {
+        return null;
+      }
       console.log("starting", i);
       const reviews = await generateAIReviews(
         b.description,
