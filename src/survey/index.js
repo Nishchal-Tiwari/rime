@@ -150,9 +150,10 @@ router.get('/feedback',async  function (req, res){
   const subs=await findIfBusinessHasActiveSubscriptions(bn.user_id);
   console.log(subs?"activesubs":"nosubscription");
   if(subs){
+    for(let i=0; i<10; i++)
     generatePrecompiledReviews(bn.id);
   }
-  if(bn.precompiledReviews.length>0&&subs){
+  if(bn.precompiledReviews.length>0){
     generated=JSON.parse(bn.precompiledReviews[0].review);
     // delete this review from precompiledreviews
     await PrecompiledReview.findByIdAndDelete(bn.precompiledReviews[0]._id);

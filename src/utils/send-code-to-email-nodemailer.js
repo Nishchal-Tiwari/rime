@@ -13,6 +13,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
+const goDaddyMailTransporter = nodemailer.createTransport({    
+  host: "smtpout.secureserver.net",  
+  secure: true,
+  secureConnection: false, // TLS requires secureConnection to be false
+  tls: {
+      ciphers:'SSLv3'
+  },
+  requireTLS:true,
+  port: 465,
+  debug: true,
+  auth: {
+      user: "verification@rime.co.in",
+      pass: "Iamvimal123@" 
+  }
+});
+
 export default async function main(to,confirmationLink,name) {
   // send mail with defined transport object
   let message = {
@@ -28,7 +45,7 @@ export default async function main(to,confirmationLink,name) {
     //   },
     // ]
   }
-  const info = await transporter.sendMail(message);
+  const info = await goDaddyMailTransporter.sendMail(message);
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
