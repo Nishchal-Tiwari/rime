@@ -59,7 +59,7 @@ const createbusiness = async (req, res) => {
       ],
     });
     const savedbusiness = await newbusiness.save();
-    generatePrecompiledReviews(savedbusiness.business_id);
+    generatePrecompiledReviews(savedbusiness.id);
     await User.findByIdAndUpdate(user_id, {
       $push: { business_ids: savedbusiness._id },
       $set: { business_id: savedbusiness._id },
@@ -135,13 +135,13 @@ const hotelfbview = async (req, res) => {
 
 async function generatePrecompiledReviews(bid) {
   try {
-    
-    // 25 free reviews
-    for (var i = 0; i < 10; i++) {
-      const b = await business.find({ business_id: bid });
+    const b = await business.findById(bid);
       if (!b) {
         return null;
       }
+    // 10 free reviews
+    for (var i = 0; i < 10; i++) {
+      
       console.log("starting", i);
       const reviews = await generateAIReviews(
         b.description,
