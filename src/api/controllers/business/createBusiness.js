@@ -59,13 +59,15 @@ const createbusiness = async (req, res) => {
       ],
     });
     const savedbusiness = await newbusiness.save();
-    let businessId=savedbusiness.id;
-    //generate 10 free reviews
-    for(let j=0;j<10;j++)
-    {
-      let bid=businessId;
-      generatePrecompiledReviews(bid);
+    let businessId = savedbusiness.id;
+// Generate 10 free reviews
+    for (let j = 0; j < 10; j++) {
+        setTimeout(() => {
+            let bid = businessId;
+            generatePrecompiledReviews(bid);
+        }, j * 2000); // Multiply index by 2000 milliseconds (2 seconds)
     }
+
     await User.findByIdAndUpdate(user_id, {
       $push: { business_ids: savedbusiness._id },
       $set: { business_id: savedbusiness._id },

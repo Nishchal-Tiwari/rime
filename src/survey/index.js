@@ -148,18 +148,28 @@ router.get('/feedback',async  function (req, res){
   }
   let generated=null;
   const subs=await findIfBusinessHasActiveSubscriptions(bn.user_id);
-  console.log(subs?"activesubs":"nosubscription");
-  if(subs){
-    for(let i=0; i<10; i++)
-    generatePrecompiledReviews(bn.id);
+ // console.log(subs?"activesubs":"nosubscription");
+ if (subs) {
+  for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+          generatePrecompiledReviews(bn.id);
+      }, i * 2000); // Multiply index by 2000 milliseconds (2 seconds)
   }
+  }
+
   if(bn.precompiledReviews.length>0){
     generated=JSON.parse(bn.precompiledReviews[0].review);
     // delete this review from precompiledreviews
     await PrecompiledReview.findByIdAndDelete(bn.precompiledReviews[0]._id);
   }
   else{
-    return res.render('noSubscription');
+    if(subs){
+    return res.render('noSubscription',{title:'Processing ... ',heading:'Please wait while intital Processing is happening',description:'Please wait momentarily as the initial processing takes place. Once this stage is complete, the service will commence. Your patience during this brief period is greatly appreciated as we ensure a seamless experience for you. Thank you for your understanding as we finalize the necessary preparations. '});
+    }
+    else{
+    return res.render('noSubscription',{title:'No Subscription',heading:'Subscription Expired',description:"It seems that the subscription for the service has expired or hasn't been activated. Please wait while the subscription renews to continue enjoying our services."});
+
+    }
   }
     
       res.render('index',{data:{

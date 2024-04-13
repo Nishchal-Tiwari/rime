@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NO HOTEL FOUND</title>
+  <title><%=title %></title>
 </head>
 <body>
   <style>
@@ -46,10 +46,8 @@ p {
   </style>
   <div id="table">
     <div id="centeralign">
-      <h1>Subscription Not Found</h1>
-      <p> It seems that the hotel subscription has expired or has not been taken.</p>
-      
-    </div>
+      <h1><%=heading %></h1>
+      <p><%=description%></p>
   </div>
   <script>function typeEffect(element, speed) {
     var text = element.innerHTML;
