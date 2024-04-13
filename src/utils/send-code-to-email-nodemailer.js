@@ -45,7 +45,7 @@ export default async function main(to,confirmationLink,name) {
     //   },
     // ]
   }
-  const info = await goDaddyMailTransporter.sendMail(message);
+  const info = await transporter.sendMail(message);
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
