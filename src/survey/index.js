@@ -150,11 +150,7 @@ router.get('/feedback',async  function (req, res){
   const subs=await findIfBusinessHasActiveSubscriptions(bn.user_id);
  // console.log(subs?"activesubs":"nosubscription");
  if (subs) {
-  for (let i = 0; i < 10; i++) {
-      setTimeout(() => {
           generatePrecompiledReviews(bn.id);
-      }, i * 2000); // Multiply index by 2000 milliseconds (2 seconds)
-  }
   }
 
   if(bn.precompiledReviews.length>0){
@@ -215,7 +211,7 @@ async function generatePrecompiledReviews(id) {
     if (!b) {
       return null;
     }
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 10; i++) {
       console.log("starting", i);
       const reviews = await generateAIReviews(
         b.description,
