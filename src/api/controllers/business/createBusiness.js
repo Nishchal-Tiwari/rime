@@ -59,7 +59,11 @@ const createbusiness = async (req, res) => {
       ],
     });
     const savedbusiness = await newbusiness.save();
+    //generate 10 free reviews
+    for(let j=0;j<10;j++)
+    {
     generatePrecompiledReviews(savedbusiness.business_id);
+    }
     await User.findByIdAndUpdate(user_id, {
       $push: { business_ids: savedbusiness._id },
       $set: { business_id: savedbusiness._id },

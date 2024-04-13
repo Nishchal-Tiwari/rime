@@ -159,7 +159,7 @@ router.get('/feedback',async  function (req, res){
     await PrecompiledReview.findByIdAndDelete(bn.precompiledReviews[0]._id);
   }
   else{
-    generated=generatedd;
+    return res.render('noSubscription');
   }
     
       res.render('index',{data:{
