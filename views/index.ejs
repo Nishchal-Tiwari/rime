@@ -291,7 +291,6 @@
           width: 80%;
         }
       }
-
       .notification {
         background-color: #62cc5c; /* Dark background for contrast */
         color: #fff; /* White text */
@@ -299,7 +298,7 @@
         border-radius: 25px; /* Rounded corners */
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
         position: fixed;
-        z-index: 1000;
+        z-index: 10001;
         right: 20px;
         top: 20px;
         font-family: "Arial", sans-serif;
@@ -350,18 +349,16 @@
         z-index: 20000;
         width: 98vw;
         top: 0;
-       
       }
       .header h1 {
         text-align: center;
         margin: 0;
         padding: 0;
-        color: white ;
+        color: white;
         font-family: Georgia, "Times New Roman", Times, serif;
         text-transform: capitalize;
         color: #ffffff75;
       }
-      
     </style>
   </head>
   <body>
@@ -414,7 +411,6 @@
             id="star1"
             value="1"
             aria-label="1 star"
-           
           /><label for="star1">★</label>
         </div>
         <div class="suggestions" id="suggestion"></div>
@@ -424,8 +420,7 @@
           placeholder="Your Review"
         ></textarea>
         <label for="summaryDropdown">Select a Summary:</label>
-        <select id="summaryDropdown" name="platform">
-        </select>
+        <select id="summaryDropdown" name="platform"></select>
         <input type="submit" value="Submit" />
       </form>
       <!-- Air Waves  -->
@@ -444,20 +439,18 @@
         'glassdoor':'Glassdoor page Review',
       }
         function updateSummaryDropdown(starRating) {
-
-        let  {generated:data,activePlatforms} = <%-JSON.stringify(data)%> // Convert your server-side data to a JavaScript object
-        console.log(activePlatforms)
-        const summaryDropdown = document.getElementById("summaryDropdown");
-        summaryDropdown.innerHTML = '<option value="">-- Select Review Platform --</option>';
-        for(let socialmedia in SocialMediaNames){
-          if(activePlatforms.includes(socialmedia)){
-            let option = document.createElement("option");
-            option.value = socialmedia;
-            option.textContent = SocialMediaNames[socialmedia];
-            summaryDropdown.appendChild(option);
+          let  {generated:data,activePlatforms} = <%-JSON.stringify(data)%> // Convert your server-side data to a JavaScript object
+          const summaryDropdown = document.getElementById("summaryDropdown");
+          summaryDropdown.innerHTML = '<option value="">-- Select Review Platform --</option>';
+          for(let socialmedia in SocialMediaNames){
+            if(activePlatforms.includes(socialmedia)){
+              let option = document.createElement("option");
+              option.value = socialmedia;
+              option.textContent = SocialMediaNames[socialmedia];
+              summaryDropdown.appendChild(option);
+            }
           }
-        }
-        
+
         const summaries = data[starRating + 'star']; // Access the correct star rating reviews
         var optionialReviews='';
         var i=0;
@@ -467,7 +460,7 @@
           const option = document.createElement('option');
           option.value = review.review;
           option.textContent = review.summary;
-         
+
           const aosAnimation = index % 3 === 0 ? 'fade-up' : (index % 3 === 1 ? 'zoom-in' : 'flip-left');
           const delay = index * 100; // Adjust the delay here, e.g., 100ms increment for each item
 
@@ -489,7 +482,6 @@
                 labelTag.classList.remove('changeBg')
               }
             });
-            console.log(document.getElementsByClassName(this.getAttribute('id'))[0])
             setTextWithInterval(this.value);
             navigator.clipboard.writeText(this.value).then(() => {
               console.log('Text copied to clipboard');
@@ -501,9 +493,15 @@
         });
       });
       }
-      // document.getElementById("review").onchange(e=>{
-      //   navigator.clipboard.writeText(e.target.value);
-      // })
+      document.getElementById("review").addEventListener('input', function(e) {
+    navigator.clipboard.writeText(e.target.value).then(() => {
+        console.log('Text copied to clipboard');
+       
+    }).catch(err => {
+        console.error('Error in copying text: ', err);
+    });
+});
+
       // Event listener for star rating changes
       document.querySelectorAll('.star-rating input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', function() {
@@ -517,13 +515,12 @@
       let token=0;
       async function setTextWithInterval(text)
       {
-          const currentToken=++token;
+        try{
+          token=token+1;
+          const currentToken=token;
           var reviewEle=document.getElementById("review")
-
-
           reviewEle.value='';
           var typeWriterRunning=false;
-          var text=text;
           let i=0;
           for(let i=0;i<text.length;i++){
             if(token!=currentToken){
@@ -532,6 +529,12 @@
             reviewEle.value+=text.charAt(i);
             await sleep(15);
           }
+        }
+        catch(err)
+        {
+          alert(err.message)
+        }
+        
       }
       function notify(text)
       {
