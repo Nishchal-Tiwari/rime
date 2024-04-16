@@ -150,11 +150,11 @@ async function generatePrecompiledReviews(bid) {
         b.activeAI
       );
       const precompiledReviews = new PrecompiledReview({
-        business_id: bid,
+        business_id: b.business_id,
         review: JSON.stringify(reviews),
       });
       const saved = await precompiledReviews.save();
-      await business.findOneAndUpdate({business_id: bid},{
+      await business.findOneAndUpdate({business_id: b.business_id},{
         $push: { precompiledReviews: saved._id }
       });
       console.log("done ",i);

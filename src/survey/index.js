@@ -16,8 +16,6 @@ router.get('/feedback',async  function (req, res){
   }
   try {
     const bn = await business.findOne({business_id: business_id}).populate('precompiledReviews');
-   
-    
     if(!bn){
       return res.render('nohotelfound');
     }
