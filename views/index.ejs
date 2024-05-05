@@ -419,8 +419,8 @@
           id="review"
           placeholder="Your Review"
         ></textarea>
-        <label for="summaryDropdown">Select a Summary:</label>
-        <select id="summaryDropdown" name="platform"></select>
+        <label for="summaryDropdown">Please select a platform to post your review<span style="color: red;"> *</span></label>
+        <select id="summaryDropdown" name="platform" ></select>
         <input type="submit" value="Submit" />
       </form>
       <!-- Air Waves  -->
@@ -466,7 +466,7 @@
 
           optionialReviews += `
             <div class="suggestion" data-aos="${aosAnimation}" data-aos-delay="${delay}">
-              <input type="radio" id="suggestion${index}" name="suggestion" value="${review.review}">
+              <input type="radio" id="suggestion${index}" name="suggestion" value="${review.review}" >
               <label for="suggestion${index}" class="suggestion${index} flagClassName">${review.summary}</label>
             </div>`;
         });
@@ -562,6 +562,20 @@
         }
       //Initial Callers
       updateSummaryDropdown('5');
+
+      document.getElementById("mainForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+  var platform = document.getElementById("summaryDropdown").value;
+  var suggestionChecked = document.querySelector('input[name="suggestion"]:checked');
+  if (!platform) {
+    alert("Please select a platform to post your review!")
+  } else if (!suggestionChecked) {
+    alert("Please select a review suggestion!");
+  } else {
+    // If platform and suggestion are selected, submit the form
+    this.submit();
+  }
+});
     </script>
     <script>
       AOS.init();
