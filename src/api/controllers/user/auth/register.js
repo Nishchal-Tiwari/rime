@@ -63,6 +63,7 @@ try{
         countryCode: geo == null ? 'IN' : geo.country,
         timezone: req.body.timezone,
         lastLogin: Date.now(),
+        isVerified:true,
         type,
         stripeCustomerId: customer.id
       });
